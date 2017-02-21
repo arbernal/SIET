@@ -1,0 +1,144 @@
+<meta http-equiv="Content-Type" content="text/html;  charset=UTF-8" />
+<link href="/resources/css/bootstrap.min.css" rel="stylesheet"
+	type="text/css" />
+
+<div class="col-xs-9">
+	<section class="container-fluid">
+		<div class="panel-heading">
+			<h3>Administración de Patios</h3>
+		</div>
+
+		<table class="table table-striped table-condensed" ng-init="findAll()">
+
+			<thead>
+				<tr>
+					<th>No.</th>
+					<th>Código</th>
+					<th>Nombre</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr
+					ng-repeat="row in data.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))"
+					myattr="{{$index}}">
+					<td>{{ $index + 1 }}</td>
+					<td>{{ row.codePati }}</td>
+					<td>{{ row.descPati }}</td>
+					<td><button class="btn btn-primary btn-small"
+							ng-click="getCurrentRow(row)" data-toggle="modal"
+							data-backdrop="static" data-keyboard="false"
+							data-target="#editModal">Editar</button></td>
+					<td><button data-toggle="modal" data-target="#deleteModal"
+							data-backdrop="static" data-keyboard="false"
+							ng-click="getCurrentRow(row)" class="btn btn-small btn-danger">Eliminar</button></td>
+				</tr>
+			</tbody>
+
+		</table>
+
+		<pagination previous-text="Anterior" next-text="Siguiente"
+			style="margin-top: 0px;" total-items="totalItems"
+			ng-model="currentPage" class="pagination-sm"
+			items-per-page="itemsPerPage"></pagination>
+
+		<!-- Dialogo para Opción Delete -->
+		<div class="modal fade" role="dialog" id="deleteModal" tabindex="-1"
+			style="display: none;">
+			<div class="modal-dialog modal-sm">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Eliminar</h4>
+					</div>
+					<div class="modal-body" style="padding: 0px;"></div>
+					<h4 class="text-center">¿Confirma que desea eliminar?</h4>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+						<button class="btn btn-primary" ng-click="deleted()">Aceptar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Fin Dialogo Delete -->
+
+
+		<!-- Dialogo para Opción Edit -->
+		<div class="modal fade" role="dialog" id="editModal" tabindex="-1"
+			style="display: none;">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Editar</h4>
+					</div>
+					<form id="formEdit" ng-submit="update()">
+						<div class="modal-body">
+							<div class="form-group">
+								<label class="control-label">Código:</label> <input type="text"
+									class="form-control" name="codePati_edit" maxlength="2"
+									required="required" ng-value="currentRow.codePati"
+									onblur="javascript:this.value = this.value.toUpperCase();"
+									onkeyup="javascript:this.value = this.value.toUpperCase();" />
+								<label class="control-label">Descripción:</label> <input
+									type="text" class="form-control" name="descPati_edit"
+									maxlength="45" ng-required="true"
+									ng-value="currentRow.descPati"
+									onblur="javascript:this.value = this.value.toUpperCase();"
+									onkeyup="javascript:this.value = this.value.toUpperCase();" />
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default exit">Cancelar</button>
+							<input type="submit" class="btn btn-primary" value="Guardar" />
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<!-- Fin Dialogo Edit -->
+
+		<!-- Dialogo para Opción Save -->
+		<div class="modal fade" role="dialog" id="saveModal" tabindex="-1"
+			style="display: none;">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Nuevo</h4>
+					</div>
+					<form id="formSave" ng-submit="save()">
+						<div class="modal-body">
+							<div class="form-group">
+								<label class="control-label">Código:</label> <input type="text"
+									class="form-control" name="codePati_new" maxlength="2"
+									required="required"
+									onblur="javascript:this.value = this.value.toUpperCase();"
+									onkeyup="javascript:this.value = this.value.toUpperCase();" />
+								<label class="control-label">Descripción:</label> <input
+									type="text" class="form-control" name="descPati_new"
+									maxlength="45"
+									onblur="javascript:this.value = this.value.toUpperCase();"
+									onkeyup="javascript:this.value = this.value.toUpperCase();" />
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default exit">Cancelar</button>
+							<input type="submit" class="btn btn-primary" value="Guardar" />
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<!-- Fin Dialogo Save -->
+
+	</section>
+</div>
+<div class="col-xs-3">
+	<div class="text-center" style="margin-top: 40%;">
+		<h4>Nuevo Elemento:</h4>
+		<button class="btn btn-lg btn-default" data-toggle="modal"
+			data-backdrop="static" data-keyboard="false" data-target="#saveModal">Agregar</button>
+	</div>
+</div>
+
+<script type="text/javascript" src="resources/js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="resources/js/widgets.js"></script>
+<script type="text/javascript" src="resources/js/bootstrap.min.js"></script>

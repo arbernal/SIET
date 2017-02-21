@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+<title>Sistema de Rastreabilidad</title>
+<meta http-equiv="Content-Type" content="text/html;  charset=UTF-8" />
+<link rel="shortcut icon" type="image/x-icon"
+	href="/resources/img/favicon.ico" />
+
+<link href="/resources/css/bootstrap.min.css" rel="stylesheet"
+	type="text/css" />
+<link href="/resources/css/style.css" rel="stylesheet" type="text/css" />
+<link href="/resources/css/layout.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="resources/js/jquery-3.1.1.min.js"></script>
+</head>
+
+<body>
+	<header class="container-fluid">
+		<h1 class="text-center">Sistema de Rastreabilidad</h1>
+	</header>
+	<nav class="container">
+		<ul class="nav nav-tabs">
+			<li role="presentation"><a href="#">Home</a></li>
+				<li role="presentation"><a href="#modulo_patio"
+				onclick="javascript:location.reload()">Patios</a></li>
+			<li role="presentation"><a href="#modulo_estiba"
+				onclick="javascript:location.reload()">Estibas</a></li>
+			<li role="presentation"><a href="#modulo_inspeccion"
+				onclick="javascript:location.reload()">Inspección</a></li>
+			<li role="presentation"><a href="#modulo_taller"
+				onclick="javascript:location.reload()">Taller</a></li>
+			<li role="presentation"><a href="#modulo_plataforma"
+				onclick="javascript:location.reload()">Plataforma</a></li>
+			<li role="presentation"><a href="#modulo_pozo"
+				onclick="javascript:location.reload()">Pozo</a></li>
+		</ul>
+	</nav>
+	<div class="container">
+		<div class="main row">
+			<div ng-view="">
+				<div class="col-xs-9">
+					<section class="container-fluid">
+					
+					</section>
+				</div>
+				<div class="col-xs-3"></div>
+			</div>
+		</div>
+
+	</div>
+	<footer class="container-fluid">
+		<p class="text-center">
+			<small>&copy; Copyright 2016, SIMMS Corporation</small>
+		</p>
+	</footer>
+	<script type="text/javascript" src="resources/js/angular.min.js"></script>
+	<script type="text/javascript" src="resources/js/angular-route.min.js"></script>
+	<script type="text/javascript" src="resources/js/route.js"></script>
+	<script type="text/javascript" src="resources/js/controller.js"></script>
+	<script type="text/javascript"
+		src="resources/js/ui-bootstrap-tpls.min.js"></script>
+</body>
+</html>
