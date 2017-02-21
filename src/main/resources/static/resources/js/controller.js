@@ -591,7 +591,7 @@ app.controller('estibaController', function($scope, $http) {
 
 });
 
-app.controller('patioController', function($scope, $http, $route, $timeout) {
+app.controller('patioController', function($scope, $http,  $modal) {
 	$scope.currentPage = 1;
 	$scope.itemsPerPage = 5;
 
@@ -604,73 +604,61 @@ app.controller('patioController', function($scope, $http, $route, $timeout) {
 		});
 	}
 	
-	$scope.getCurrentRow = function(current) {
-		$scope.currentRow = current;
-	}
 
-	$scope.update = function() {
-		var codePati =  $('input:text[name=codePati_edit]').val();
-		var descPati =  $('input:text[name=descPati_edit]').val();
-		var estaPati =  true;
-		var patio = { codePati, descPati, estaPati };
-		$http({
-		    url: $scope.currentRow._links.patio.href,
-		    method: "put",
-		    headers: {
-		        "Content-Type": "application/hal+json"
-		    },
-		    data: patio
-		}).success(function(data) {
-			$scope.findAll();
-			$('#editModal').modal('hide');
-		}).error(function(data) {
-			console.log('Error:' + data);
-		});
-		
-	}
-	
 	$scope.save = function() {
-		var codePati =  $('input:text[name=codePati_new]').val();
-		var descPati =  $('input:text[name=descPati_new]').val();
-		var estaPati = true;
-		var patio = { codePati, descPati , estaPati };
-		$http({
-		    url: '/service/patio',
-		    method: "post",
-		    headers: {
-		        "Content-Type": "application/hal+json"
-		    },
-		    data: patio
-		}).success(function(data) {
-			$scope.findAll();
-			$('#formSave').trigger('reset');
-			$('#saveModal').modal('hide');
-		}).error(function(data) {
-			console.log('Error:' + data);
-		});	
-	}
-	
-	$scope.deleted = function() {
-		var codePati =  $scope.currentRow.codePati;
-		var descPati =  $scope.currentRow.descPati;
-		var estaPati = false;
-		var patio = { codePati, descPati , estaPati };
-		$http({
-		    url: $scope.currentRow._links.patio.href,
-		    method: "put",
-		    headers: {
-		        "Content-Type": "application/hal+json"
-		    },
-		    data: patio
-		}).success(function(data) {
-			$scope.findAll();
-			$('#deleteModal').modal('hide');
-		}).error(function(data) {
-			console.log('Error:' + data);
+		$scope.patio = {};
+		var modalInstance = $modal.open({
+             template: document.getElementById("saveModal").childNodes[1].innerHTML,
+             controller: function($scope, $http, $modalInstance){
+            	 $scope.add = function(){
+            		 $scope.patio.estaPati = 1;
+            		 $modalInstance.close($scope.patio);
+            	 }
+            	 
+            	 $scope.cancel = function() {
+            		 $modalInstance.dismiss('cancel');
+            	 };
+             }
 		});
-		
+			
+		modalInstance.result.then(function (value) {
+			$http({ 
+				url: '/service/patio',
+			    method: "post", data: value,
+			    headers: {
+			        "Content-Type": "application/hal+json"
+			    }
+			}).success(function(data) {
+				$scope.findAll();
+			}).error(function(data) {
+				console.log('Error:' + data);
+			});
+	    }); 
 	};
 	
+	$scope.update = function(row) {
+		var modalInstance = $modal.open({
+             template: document.getElementById("editModal").childNodes[1].innerHTML,
+             controller: function($scope, $http, $modalInstance){
+            	 $scope.current = Object.assign({}, row);
+            	 
+            	 $scope.edit = function(){
+            		 $scope.current.estaPati = 1;
+            		 $modalInstance.close($scope.current);
+            	 }
+            	 
+            	 $scope.cancel = function() {
+            		 $modalInstance.dismiss('cancel');
+            	 };
+             }
+		});
+			
+		modalInstance.result.then(function (value) {
+			
+	    }); 
+	};
+	
+
 	
 });
 
