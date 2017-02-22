@@ -10,19 +10,18 @@
 
 		<table class="table table-striped table-condensed"
 			data-ng-init="findAll()">
-
 			<thead>
 				<tr>
 					<th>No.</th>
 					<th>Código</th>
 					<th>Nombre</th>
+					<th colspan="2">Edición</th>
 				</tr>
 			</thead>
-
 			<tbody>
 				<tr
-					ng-repeat="row in data.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))"
-					myattr="{{$index}}">
+					data-ng-repeat="row in data.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))"
+					data-myattr="{{$index}}">
 					<td>{{ $index + 1 }}</td>
 					<td>{{ row.codePati }}</td>
 					<td>{{ row.descPati }}</td>
@@ -32,7 +31,6 @@
 							data-ng-click="deleted(row)">Eliminar</button></td>
 				</tr>
 			</tbody>
-
 		</table>
 
 		<pagination previous-text="Anterior" next-text="Siguiente"
@@ -51,14 +49,14 @@
 					<div class="modal-body" style="padding: 0px;"></div>
 					<h4 class="text-center">¿Confirma que desea eliminar?</h4>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-						<button class="btn btn-primary" ng-click="deleted()">Aceptar</button>
+						<button type="button" class="btn btn-default"
+							data-ng-click="cancel()">Cancelar</button>
+						<button class="btn btn-primary" data-ng-click="deleted()">Aceptar</button>
 					</div>
 				</div>
 			</div>
 		</div>
 		<!-- Fin Dialogo Delete -->
-
 
 		<!-- Dialogo para Opción Edit -->
 		<div class="modal fade" role="dialog" id="editModal" tabindex="-1"
