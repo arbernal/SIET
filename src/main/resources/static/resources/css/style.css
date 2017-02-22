@@ -20,3 +20,12 @@ footer {
 	background: #0091EA;
 	color: white;
 }
+
+thead th {
+  background-color: #006DCC;
+  color: white;
+}
+
+tbody td {
+  background-color: #EEEEEE;
+}

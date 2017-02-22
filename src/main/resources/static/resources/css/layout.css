@@ -1,18 +1,16 @@
-.modal {
-  text-align: center;
+table {
+  border-collapse: separate;
+  border-spacing: 0 5px;
 }
 
-@media screen and (min-width: 768px) { 
-  .modal:before {
-    display: inline-block;
-    vertical-align: middle;
-    content: " ";
-    height: 100%;
-  }
+tr td:first-child,
+tr th:first-child {
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
 }
 
-.modal-dialog {
-  display: inline-block;
-  text-align: left;
-  vertical-align: middle;
+tr td:last-child,
+tr th:last-child {
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
 }
