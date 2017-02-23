@@ -3,10 +3,10 @@
 	type="text/css" />
 
 <div class="col-xs-9">
-		<div class="panel-heading">
-			<h3>Administración de Patios</h3>
-		</div>
-
+	<div class="panel-heading">
+		<h3>Administración de Patios</h3>
+	</div>
+	<div class="panel-body" style="height: 280px;">
 		<table class="table table-striped table-condensed"
 			data-data-ng-init="findAll()">
 			<thead>
@@ -21,110 +21,114 @@
 				<tr
 					data-data-ng-repeat="row in data.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))"
 					data-myattr="{{$index}}">
-					<td>{{ $index + 1 }}</td>
+					<td>{{ currentPage == 1 ? $index + 1 : ((currentPage - 1) *
+						itemsPerPage) + $index + 1 }}</td>
 					<td>{{ row.codePati }}</td>
 					<td>{{ row.descPati }}</td>
 					<td><button type="button" class="btn btn-primary btn-small"
 							data-data-ng-click="update(row)">Editar</button></td>
-					<td><button type="button" class="btn btn-small btn-dadata-nger"
+					<td><button type="button"
+							class="btn btn-small btn-dadata-nger"
 							data-data-ng-click="deleted(row)">Eliminar</button></td>
 				</tr>
 			</tbody>
 		</table>
+	</div>
+	
+	<pagination previous-text="Anterior" next-text="Siguiente"
+		style="margin-top: 0px;" total-items="totalItems"
+		data-ng-model="currentPage" class="pagination-sm"
+		items-per-page="itemsPerPage"></pagination>
 
-		<pagination previous-text="Anterior" next-text="Siguiente"
-			style="margin-top: 0px;" total-items="totalItems"
-			data-ng-model="currentPage" class="pagination-sm"
-			items-per-page="itemsPerPage"></pagination>
+	<!-- Dialogo para Opción Delete -->
+	<div class="modal fade" role="dialog" id="deleteModal" tabindex="-1"
+		style="display: none;">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Eliminar</h4>
+				</div>
+				<div class="modal-body" style="paddidata-ng: 0px;"></div>
+				<h4 class="text-center">¿Confirma que desea eliminar?</h4>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default"
+						data-data-ng-click="cancel()">Cancelar</button>
+					<button class="btn btn-primary" data-data-ng-click="deleted()">Aceptar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Fin Dialogo Delete -->
 
-		<!-- Dialogo para Opción Delete -->
-		<div class="modal fade" role="dialog" id="deleteModal" tabindex="-1"
-			style="display: none;">
-			<div class="modal-dialog modal-sm">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h4 class="modal-title">Eliminar</h4>
+	<!-- Dialogo para Opción Edit -->
+	<div class="modal fade" role="dialog" id="editModal" tabindex="-1"
+		style="display: none;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Editar</h4>
+				</div>
+				<form id="formEdit" data-data-ng-submit="edit()">
+					<div class="modal-body">
+						<div class="form-group">
+							<label class="control-label">Código:</label> <input type="text"
+								class="form-control" maxlength="2" required="required"
+								data-data-ng-model="current.codePati"
+								onblur="javascript:this.value = this.value.toUpperCase();"
+								onkeyup="javascript:this.value = this.value.toUpperCase();" />
+							<label class="control-label">Descripción:</label> <input
+								type="text" class="form-control" maxlength="45"
+								required="required" data-data-ng-model="current.descPati"
+								onblur="javascript:this.value = this.value.toUpperCase();"
+								onkeyup="javascript:this.value = this.value.toUpperCase();" />
+						</div>
 					</div>
-					<div class="modal-body" style="paddidata-ng: 0px;"></div>
-					<h4 class="text-center">¿Confirma que desea eliminar?</h4>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default"
 							data-data-ng-click="cancel()">Cancelar</button>
-						<button class="btn btn-primary" data-data-ng-click="deleted()">Aceptar</button>
+						<input type="submit" class="btn btn-primary" value="Guardar" />
 					</div>
-				</div>
+				</form>
 			</div>
 		</div>
-		<!-- Fin Dialogo Delete -->
+	</div>
+	<!-- Fin Dialogo Edit -->
 
-		<!-- Dialogo para Opción Edit -->
-		<div class="modal fade" role="dialog" id="editModal" tabindex="-1"
-			style="display: none;">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h4 class="modal-title">Editar</h4>
-					</div>
-					<form id="formEdit" data-data-ng-submit="edit()">
-						<div class="modal-body">
-							<div class="form-group">
-								<label class="control-label">Código:</label> <input type="text"
-									class="form-control" maxlength="2" required="required"
-									data-data-ng-model="current.codePati"
-									onblur="javascript:this.value = this.value.toUpperCase();"
-									onkeyup="javascript:this.value = this.value.toUpperCase();" />
-								<label class="control-label">Descripción:</label> <input
-									type="text" class="form-control" maxlength="45"
-									required="required" data-data-ng-model="current.descPati"
-									onblur="javascript:this.value = this.value.toUpperCase();"
-									onkeyup="javascript:this.value = this.value.toUpperCase();" />
-							</div>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default"
-								data-data-ng-click="cancel()">Cancelar</button>
-							<input type="submit" class="btn btn-primary" value="Guardar" />
-						</div>
-					</form>
+	<!-- Dialogo para Opción Save -->
+	<div class="modal fade" role="dialog" id="saveModal" tabindex="-1"
+		style="display: none;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Nuevo</h4>
 				</div>
+				<form id="formSave" data-data-ng-submit="add()">
+					<div class="modal-body">
+						<div class="form-group">
+							<label class="control-label">Código:</label> <input type="text"
+								class="form-control" maxlength="2" required="required"
+								data-data-ng-model="patio.codePati"
+								onblur="javascript:this.value = this.value.toUpperCase();"
+								onkeyup="javascript:this.value = this.value.toUpperCase();" />
+							<label class="control-label">Descripción:</label> <input
+								type="text" class="form-control" maxlength="45"
+								data-data-ng-model="patio.descPati"
+								onblur="javascript:this.value = this.value.toUpperCase();"
+								onkeyup="javascript:this.value = this.value.toUpperCase();" />
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default"
+							data-data-ng-click="cancel()">Cancelar</button>
+						<input type="submit" class="btn btn-primary" value="Guardar" />
+					</div>
+				</form>
 			</div>
 		</div>
-		<!-- Fin Dialogo Edit -->
+	</div>
+	<!-- Fin Dialogo Save -->
 
-		<!-- Dialogo para Opción Save -->
-		<div class="modal fade" role="dialog" id="saveModal" tabindex="-1"
-			style="display: none;">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h4 class="modal-title">Nuevo</h4>
-					</div>
-					<form id="formSave" data-data-ng-submit="add()">
-						<div class="modal-body">
-							<div class="form-group">
-								<label class="control-label">Código:</label> <input type="text"
-									class="form-control" maxlength="2" required="required"
-									data-data-ng-model="patio.codePati"
-									onblur="javascript:this.value = this.value.toUpperCase();"
-									onkeyup="javascript:this.value = this.value.toUpperCase();" />
-								<label class="control-label">Descripción:</label> <input
-									type="text" class="form-control" maxlength="45"
-									data-data-ng-model="patio.descPati"
-									onblur="javascript:this.value = this.value.toUpperCase();"
-									onkeyup="javascript:this.value = this.value.toUpperCase();" />
-							</div>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default"
-								data-data-ng-click="cancel()">Cancelar</button>
-							<input type="submit" class="btn btn-primary" value="Guardar" />
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-		<!-- Fin Dialogo Save -->
-		
+
 </div>
 <div class="col-xs-3">
 	<div class="text-center" style="margin-top: 40%;">
