@@ -20,29 +20,18 @@
 	<nav class="container">
 		<ul class="nav nav-tabs">
 			<li role="presentation"><a href="#">Home</a></li>
-				<li role="presentation"><a href="#modulo_patio"
-				onclick="javascript:location.reload()">Patios</a></li>
-			<li role="presentation"><a href="#modulo_estiba"
-				onclick="javascript:location.reload()">Estibas</a></li>
-			<li role="presentation"><a href="#modulo_inspeccion"
-				onclick="javascript:location.reload()">Inspección</a></li>
-			<li role="presentation"><a href="#modulo_taller"
-				onclick="javascript:location.reload()">Taller</a></li>
-			<li role="presentation"><a href="#modulo_plataforma"
-				onclick="javascript:location.reload()">Plataforma</a></li>
-			<li role="presentation"><a href="#modulo_pozo"
-				onclick="javascript:location.reload()">Pozo</a></li>
+			<li role="presentation"><a href="#modulo_patio">Patios</a></li>
+			<li role="presentation"><a href="#modulo_estiba">Estibas</a></li>
+			<li role="presentation"><a href="#modulo_inspeccion">Inspección</a></li>
+			<li role="presentation"><a href="#modulo_taller">Taller</a></li>
+			<li role="presentation"><a href="#modulo_plataforma">Plataforma</a></li>
+			<li role="presentation"><a href="#modulo_pozo">Pozo</a></li>
 		</ul>
 	</nav>
 	<div class="container">
 		<div class="main row">
-			<div ng-view="">
-				<div class="col-xs-9">
-					<section class="container-fluid">
-					
-					</section>
-				</div>
-				<div class="col-xs-3"></div>
+			<div data-ng-view="" class="col-xs-12">
+				<section class="container-fluid"></section>
 			</div>
 		</div>
 

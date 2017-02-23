@@ -596,7 +596,7 @@ app.controller('patioController', function($scope, $http,  $modal) {
 	$scope.itemsPerPage = 5;
 
 	$scope.findAll = function(){
-		$http.get('/service/patio').success(function(data) {
+		$http.get('/service/patio/search/findByActive').success(function(data) {
 			$scope.data = data._embedded.patio;
 			$scope.totalItems = $scope.data.length;
 		}).error(function(data) {
@@ -609,6 +609,7 @@ app.controller('patioController', function($scope, $http,  $modal) {
 		$scope.patio = {};
 		var modalInstance = $modal.open({
              template: document.getElementById("saveModal").childNodes[1].innerHTML,
+             backdrop: 'static', keyboard  : false, size:'sm',
              controller: function($scope, $http, $modalInstance){
             	 $scope.add = function(){
             		 $scope.patio.estaPati = 1;
@@ -639,11 +640,11 @@ app.controller('patioController', function($scope, $http,  $modal) {
 	$scope.update = function(row) {
 		var modalInstance = $modal.open({
              template: document.getElementById("editModal").childNodes[1].innerHTML,
+             backdrop: 'static', keyboard  : false , size:'sm',
              controller: function($scope, $http, $modalInstance){
             	 $scope.current = Object.assign({}, row);
             	 
             	 $scope.edit = function(){
-            		 $scope.current.estaPati = 1;
             		 $modalInstance.close($scope.current);
             	 }
             	 
@@ -654,11 +655,56 @@ app.controller('patioController', function($scope, $http,  $modal) {
 		});
 			
 		modalInstance.result.then(function (value) {
+			$scope.item = { codePati: value.codePati, 
+							descPati: value.descPati, estaPati: 1 };
+			$http({ 
+				url: value._links.patio.href,
+			    method: "put", data: $scope.item,
+			    headers: {
+			        "Content-Type": "application/hal+json"
+			    }
+			}).success(function(data) {
+				$scope.findAll();
+			}).error(function(data) {
+				console.log('Error:' + data);
+			});
 			
 	    }); 
 	};
 	
-
+	$scope.deleted = function(row) {
+		var modalInstance = $modal.open({
+             template: document.getElementById("deleteModal").childNodes[1].innerHTML,
+             backdrop: 'static', keyboard  : false, size:'sm',
+             controller: function($scope, $http, $modalInstance){
+            	 
+            	 $scope.remove = function(){
+            		 $modalInstance.close(row);
+            	 }
+            	 
+            	 $scope.cancel = function() {
+            		 $modalInstance.dismiss('cancel');
+            	 };
+             }
+		});
+			
+		modalInstance.result.then(function (value) {
+			$scope.item = { codePati: value.codePati, 
+							descPati: value.descPati, estaPati: 0 };
+			$http({ 
+				url: value._links.patio.href,
+			    method: "put", data: $scope.item,
+			    headers: {
+			        "Content-Type": "application/hal+json"
+			    }
+			}).success(function(data) {
+				$scope.findAll();
+			}).error(function(data) {
+				console.log('Error:' + data);
+			}); 
+			
+	    }); 
+	};
 	
 });
 
