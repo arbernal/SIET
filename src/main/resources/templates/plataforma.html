@@ -23,8 +23,7 @@
 			<tr
 				data-ng-repeat="row in data.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))"
 				data-myattr="{{$index}}">
-				<td>{{ currentPage == 1 ? $index + 1 : (currentPage -1) *(
-					(($index + 1) + 4) ) }}</td>
+				<td>{{ currentPage == 1 ? $index + 1 : ((currentPage - 1) * itemsPerPage) + $index + 1 }}</td>
 				<td>{{ row.codePlat }}</td>
 				<td>{{ row.descPlat }}</td>
 				<td><button class="btn btn-primary btn-small"
