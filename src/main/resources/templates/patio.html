@@ -8,7 +8,7 @@
 		</div>
 
 		<table class="table table-striped table-condensed"
-			data-ng-init="findAll()">
+			data-data-ng-init="findAll()">
 			<thead>
 				<tr>
 					<th>No.</th>
@@ -19,22 +19,22 @@
 			</thead>
 			<tbody>
 				<tr
-					data-ng-repeat="row in data.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))"
+					data-data-ng-repeat="row in data.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))"
 					data-myattr="{{$index}}">
 					<td>{{ $index + 1 }}</td>
 					<td>{{ row.codePati }}</td>
 					<td>{{ row.descPati }}</td>
 					<td><button type="button" class="btn btn-primary btn-small"
-							data-ng-click="update(row)">Editar</button></td>
-					<td><button type="button" class="btn btn-small btn-danger"
-							data-ng-click="deleted(row)">Eliminar</button></td>
+							data-data-ng-click="update(row)">Editar</button></td>
+					<td><button type="button" class="btn btn-small btn-dadata-nger"
+							data-data-ng-click="deleted(row)">Eliminar</button></td>
 				</tr>
 			</tbody>
 		</table>
 
 		<pagination previous-text="Anterior" next-text="Siguiente"
 			style="margin-top: 0px;" total-items="totalItems"
-			ng-model="currentPage" class="pagination-sm"
+			data-ng-model="currentPage" class="pagination-sm"
 			items-per-page="itemsPerPage"></pagination>
 
 		<!-- Dialogo para Opción Delete -->
@@ -45,12 +45,12 @@
 					<div class="modal-header">
 						<h4 class="modal-title">Eliminar</h4>
 					</div>
-					<div class="modal-body" style="padding: 0px;"></div>
+					<div class="modal-body" style="paddidata-ng: 0px;"></div>
 					<h4 class="text-center">¿Confirma que desea eliminar?</h4>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default"
-							data-ng-click="cancel()">Cancelar</button>
-						<button class="btn btn-primary" data-ng-click="deleted()">Aceptar</button>
+							data-data-ng-click="cancel()">Cancelar</button>
+						<button class="btn btn-primary" data-data-ng-click="deleted()">Aceptar</button>
 					</div>
 				</div>
 			</div>
@@ -65,24 +65,24 @@
 					<div class="modal-header">
 						<h4 class="modal-title">Editar</h4>
 					</div>
-					<form id="formEdit" data-ng-submit="edit()">
+					<form id="formEdit" data-data-ng-submit="edit()">
 						<div class="modal-body">
 							<div class="form-group">
 								<label class="control-label">Código:</label> <input type="text"
 									class="form-control" maxlength="2" required="required"
-									data-ng-model="current.codePati"
+									data-data-ng-model="current.codePati"
 									onblur="javascript:this.value = this.value.toUpperCase();"
 									onkeyup="javascript:this.value = this.value.toUpperCase();" />
 								<label class="control-label">Descripción:</label> <input
 									type="text" class="form-control" maxlength="45"
-									required="required" data-ng-model="current.descPati"
+									required="required" data-data-ng-model="current.descPati"
 									onblur="javascript:this.value = this.value.toUpperCase();"
 									onkeyup="javascript:this.value = this.value.toUpperCase();" />
 							</div>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default"
-								data-ng-click="cancel()">Cancelar</button>
+								data-data-ng-click="cancel()">Cancelar</button>
 							<input type="submit" class="btn btn-primary" value="Guardar" />
 						</div>
 					</form>
@@ -99,24 +99,24 @@
 					<div class="modal-header">
 						<h4 class="modal-title">Nuevo</h4>
 					</div>
-					<form id="formSave" data-ng-submit="add()">
+					<form id="formSave" data-data-ng-submit="add()">
 						<div class="modal-body">
 							<div class="form-group">
 								<label class="control-label">Código:</label> <input type="text"
 									class="form-control" maxlength="2" required="required"
-									data-ng-model="patio.codePati"
+									data-data-ng-model="patio.codePati"
 									onblur="javascript:this.value = this.value.toUpperCase();"
 									onkeyup="javascript:this.value = this.value.toUpperCase();" />
 								<label class="control-label">Descripción:</label> <input
 									type="text" class="form-control" maxlength="45"
-									data-ng-model="patio.descPati"
+									data-data-ng-model="patio.descPati"
 									onblur="javascript:this.value = this.value.toUpperCase();"
 									onkeyup="javascript:this.value = this.value.toUpperCase();" />
 							</div>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default"
-								data-ng-click="cancel()">Cancelar</button>
+								data-data-ng-click="cancel()">Cancelar</button>
 							<input type="submit" class="btn btn-primary" value="Guardar" />
 						</div>
 					</form>
@@ -130,7 +130,7 @@
 	<div class="text-center" style="margin-top: 40%;">
 		<h4>Nuevo Elemento:</h4>
 		<button type="button" class="btn btn-lg btn-default"
-			data-ng-click="save()">Agregar</button>
+			data-data-ng-click="save()">Agregar</button>
 	</div>
 </div>
 
