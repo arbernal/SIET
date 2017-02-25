@@ -12,6 +12,7 @@ header {
 	color: white;
 }
 
+
 aside {
 	background: #c0392b;
 }
@@ -22,10 +23,15 @@ footer {
 }
 
 thead th {
-  background-color: #006DCC;
-  color: white;
+	background-color: #006DCC;
+	color: white;
 }
 
 tbody td {
-  background-color: #EEEEEE;
+	background-color: #EEEEEE;
+}
+
+input[type="text"]:disabled {
+	border: none;
+    background: transparent;
 }

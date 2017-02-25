@@ -24,14 +24,14 @@
 						itemsPerPage) + $index + 1 }}</td>
 					<td>{{ row.descInsp }}</td>
 					<td data-patio="{{ row._links.patio.href }}"></td>
-					<td><button class="btn btn-primary btn-small"
+					<td><button class="btn btn-custom-color btn-small"
 							data-ng-click="getCurrentRow(row);getEdPatio()"
 							data-toggle="modal" data-backdrop="static" data-keyboard="false"
 							data-target="#editModal">Editar</button></td>
 					<td><button data-toggle="modal" data-target="#deleteModal"
 							data-backdrop="static" data-keyboard="false"
 							data-ng-click="getCurrentRow(row)"
-							class="btn btn-small btn-dadata-nger">Eliminar</button></td>
+							class="btn btn-small btn-danger">Eliminar</button></td>
 				</tr>
 			</tbody>
 		</table>
