@@ -27,14 +27,10 @@
 						itemsPerPage) + $index + 1 }}</td>
 					<td>{{ row.codePlat }}</td>
 					<td>{{ row.descPlat }}</td>
-					<td><button class="btn btn-primary btn-small"
-							data-ng-click="getCurrentRow(row)" data-toggle="modal"
-							data-backdrop="static" data-keyboard="false"
-							data-target="#editModal">Editar</button></td>
-					<td><button data-toggle="modal" data-target="#deleteModal"
-							data-backdrop="static" data-keyboard="false"
-							data-ng-click="getCurrentRow(row)"
-							class="btn btn-small btn-danger">Eliminar</button></td>
+					<td><button type="button" class="btn btn-primary btn-small"
+							data-ng-click="update(row);">Editar</button></td>
+					<td><button type="button" class="btn btn-small btn-danger"
+							data-ng-click="deleted(row);">Eliminar</button></td>
 				</tr>
 			</tbody>
 
@@ -54,17 +50,17 @@
 				<div class="modal-header">
 					<h4 class="modal-title">Eliminar</h4>
 				</div>
-				<div class="modal-body" style="paddidata-ng: 0px;"></div>
+				<div class="modal-body" style="padding: 0px;"></div>
 				<h4 class="text-center">¿Confirma que desea eliminar?</h4>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-					<button class="btn btn-primary" data-ng-click="deleted()">Aceptar</button>
+					<button type="button" class="btn btn-default"
+						data-ng-click="cancel()">Cancelar</button>
+					<button class="btn btn-primary" data-ng-click="remove()">Aceptar</button>
 				</div>
 			</div>
 		</div>
 	</div>
 	<!-- Fin Dialogo Delete -->
-
 
 	<!-- Dialogo para Opción Edit -->
 	<div class="modal fade" role="dialog" id="editModal" tabindex="-1"
@@ -74,24 +70,24 @@
 				<div class="modal-header">
 					<h4 class="modal-title">Editar</h4>
 				</div>
-				<form id="formEdit" data-ng-submit="update()">
+				<form id="formEdit" data-ng-submit="edit()">
 					<div class="modal-body">
 						<div class="form-group">
 							<label class="control-label">Código:</label> <input type="text"
-								class="form-control" name="codePlat_edit" maxlength="2"
-								required="required" data-ng-value="currentRow.codePlat"
+								class="form-control" maxlength="2" required="required"
+								data-ng-model="current.codePlat"
 								onblur="javascript:this.value = this.value.toUpperCase();"
 								onkeyup="javascript:this.value = this.value.toUpperCase();" />
 							<label class="control-label">Descripción:</label> <input
-								type="text" class="form-control" name="descPlat_edit"
-								maxlength="45" data-ng-required="true"
-								data-ng-value="currentRow.descPlat"
+								type="text" class="form-control" maxlength="45"
+								required="required" data-ng-model="current.descPlat"
 								onblur="javascript:this.value = this.value.toUpperCase();"
 								onkeyup="javascript:this.value = this.value.toUpperCase();" />
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default exit">Cancelar</button>
+						<button type="button" class="btn btn-default"
+							data-ng-click="cancel()">Cancelar</button>
 						<input type="submit" class="btn btn-primary" value="Guardar" />
 					</div>
 				</form>
@@ -108,17 +104,17 @@
 				<div class="modal-header">
 					<h4 class="modal-title">Nuevo</h4>
 				</div>
-				<form id="formSave" data-ng-submit="save()">
+				<form id="formSave" data-ng-submit="add()">
 					<div class="modal-body">
 						<div class="form-group">
 							<label class="control-label">Código:</label> <input type="text"
-								class="form-control" name="codePlat_new" maxlength="2"
-								required="required"
+								class="form-control" maxlength="2" required="required"
+								data-ng-model="plata.codePlat"
 								onblur="javascript:this.value = this.value.toUpperCase();"
 								onkeyup="javascript:this.value = this.value.toUpperCase();" />
 							<label class="control-label">Descripción:</label> <input
-								type="text" class="form-control" name="descPlat_new"
-								maxlength="45"
+								type="text" class="form-control" maxlength="45"
+								data-ng-model="plata.descPlat"
 								onblur="javascript:this.value = this.value.toUpperCase();"
 								onkeyup="javascript:this.value = this.value.toUpperCase();" />
 						</div>
@@ -137,8 +133,8 @@
 <div class="col-xs-3">
 	<div class="text-center" style="margin-top: 40%;">
 		<h4>Nuevo Elemento:</h4>
-		<button class="btn btn-lg btn-default" data-toggle="modal"
-			data-backdrop="static" data-keyboard="false" data-target="#saveModal">Agregar</button>
+		<button type="button" class="btn btn-lg btn-default"
+			data-ng-click="save()">Agregar</button>
 	</div>
 </div>
 
