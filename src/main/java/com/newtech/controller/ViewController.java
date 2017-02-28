@@ -40,5 +40,10 @@ public class ViewController {
 	public String getPlataforma() {
 		return "plataforma";
 	}
+	
+	@RequestMapping(path = { "/reporte", "/reporte/" })
+	public String getReporte() {
+		return "reporte";
+	}
 
 }

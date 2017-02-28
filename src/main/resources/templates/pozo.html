@@ -1,7 +1,7 @@
 <meta http-equiv="Content-Type" content="text/html;  charset=UTF-8" />
 <link href="/resources/css/bootstrap.min.css" rel="stylesheet"
 	type="text/css" />
-<div class="col-xs-9">
+<div class="col-xs-12">
 
 	<div class="panel-heading">
 		<h3>Administración de Pozo</h3>
@@ -66,20 +66,22 @@
 				<div class="modal-header">
 					<h4 class="modal-title">Editar</h4>
 				</div>
-				<form id="formEdit" data-ng-submit="update()">
+				<form id="formEdit" data-ng-submit="edit()">
 					<div class="modal-body">
 						<div class="form-group">
 							<label for="recipient-name" class="control-label">Nombre:</label>
 							<input type="text" class="form-control" maxlength="45"
-								required="required"
+								required="required" data-ng-model="current.descPozo"
 								onblur="javascript:this.value = this.value.toUpperCase();"
 								onkeyup="javascript:this.value = this.value.toUpperCase();" />
-							<br /> <label class="control-label">Plataforma: </label> {{
-							itemPlataformas.descPlat }}
+							<br /> <label class="control-label">Plataforma: </label> <input
+								type="text" disabled="disabled" data-ng-init="getPlataforma()"
+								data-ng-model="current.plataforma.descPlat" />
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default exit">Cancelar</button>
+						<button type="button" class="btn btn-default"
+							data-ng-click="cancel()">Cancelar</button>
 						<input type="submit" class="btn btn-primary" value="Guardar" />
 					</div>
 				</form>
@@ -96,17 +98,17 @@
 				<div class="modal-header">
 					<h4 class="modal-title">Nuevo</h4>
 				</div>
-				<form id="formSave" data-ng-submit="save()">
+				<form id="formSave" data-ng-submit="add()">
 					<div class="modal-body">
 						<div class="form-group">
 							<label class="control-label">Nombre:</label> <input type="text"
-								class="form-control" name="descPozo_new" maxlength="45"
-								required="required"
+								class="form-control" maxlength="45" required="required"
+								data-ng-model="pozo.descPozo"
 								onblur="javascript:this.value = this.value.toUpperCase();"
 								onkeyup="javascript:this.value = this.value.toUpperCase();" />
 							<label class="control-label">Plataforma:</label> <select
-								name="plataforma_new" required="required"
-								data-ng-model="saveModel" data-ng-init="getPlataformas()"
+								required="required" data-ng-model="pozo.plataforma"
+								data-ng-init="getPlataformas()"
 								data-ng-options="item as item.descPlat for item in plataforma track by item._links.plataforma.href"
 								class="form-control">
 								<option value="" selected="selected">-- Seleccione una
@@ -127,13 +129,7 @@
 
 </div>
 
-<div class="col-xs-3">
-	<div class="text-center" style="margin-top: 40%;">
-		<h4>Nuevo Elemento:</h4>
-		<button type="button" class="btn btn-lg btn-default"
-			data-ng-click="save()">Agregar</button>
-	</div>
-</div>
+
 
 
 <script type="text/javascript" src="resources/js/jquery-3.1.1.min.js"></script>

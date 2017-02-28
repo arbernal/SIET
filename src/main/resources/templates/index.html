@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="app">
+<html data-ng-app="app">
 <head>
 <title>Sistema de Rastreabilidad</title>
 <meta http-equiv="Content-Type" content="text/html;  charset=UTF-8" />
@@ -15,7 +15,9 @@
 
 <body>
 	<header class="container-fluid">
-		<h1 class="text-center">Sistema de Rastreabilidad</h1>
+		<img alt="Logotipo de la empresa" src="/resources/img/banner.png"
+			class="img-responsive center-block img-banner"  />
+		<h1 class="text-center title-banner" >Sistema de Rastreabilidad</h1>
 	</header>
 	<nav class="container">
 		<ul class="nav nav-tabs">
@@ -26,11 +28,12 @@
 			<li role="presentation"><a href="#modulo_taller">Taller</a></li>
 			<li role="presentation"><a href="#modulo_plataforma">Plataforma</a></li>
 			<li role="presentation"><a href="#modulo_pozo">Pozo</a></li>
+			<li role="presentation"><a href="#modulo_reporte">Reporte</a></li>
 		</ul>
 	</nav>
 	<div class="container">
-		<div class="main row">
-			<div data-ng-view="" class="col-xs-12">
+		<div class="row">
+			<div data-ng-view="">
 				<section class="container-fluid"></section>
 			</div>
 		</div>

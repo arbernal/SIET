@@ -22,8 +22,10 @@ app.config(function($routeProvider) {
 	}).when('/modulo_pozo', {
 		templateUrl : '/pozo',
 		controller : 'pozoController'
-	})
-	.otherwise({
+	}).when('/modulo_reporte', {
+		templateUrl : '/reporte',
+		controller : 'reporteController'
+	}).otherwise({
 		redirectTo : '/index'
 	});
 });

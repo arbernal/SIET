@@ -18,20 +18,49 @@ tr td:last-child, tr th:last-child {
 }
 
 .modal {
-  text-align: center;
-  padding: 0!important;
+	text-align: center;
+	padding: 0 !important;
 }
 
 .modal:before {
-  content: '';
-  display: inline-block;
-  height: 100%;
-  vertical-align: middle;
-  margin-right: -4px;
+	content: '';
+	display: inline-block;
+	height: 100%;
+	vertical-align: middle;
+	margin-right: -4px;
 }
 
 .modal-dialog {
-  display: inline-block;
-  text-align: left;
-  vertical-align: middle;
+	display: inline-block;
+	text-align: left;
+	vertical-align: middle;
+}
+
+.nav-tabs > li, .nav-pills > li {
+    float:none !important;
+    display:inline-block !important;
+    *display:inline !; /* ie7 fix */
+     zoom:1; /* hasLayout ie7 trigger */
+}
+
+.nav-tabs, .nav-pills {
+    text-align:center !important;
+}
+
+
+@media screen and (min-width: 1370px) {
+	.img-banner {
+		height: 230px !important;
+		width: 900px !important;
+	}
+}
+
+@media screen and (max-width:1369px) {
+	.img-banner {
+		max-width: 25% !important;
+	}
+	.title-banner{
+		margin-top: 0%;
+		margin-left: 0px;
+	}
 }

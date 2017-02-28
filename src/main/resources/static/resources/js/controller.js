@@ -1,4 +1,8 @@
-app.controller('pozoController', function($scope, $http) {
+app.controller('reporteController', function($scope, $http) {
+		
+});
+
+app.controller('pozoController', function($scope, $http, $modal) {
 	$scope.currentPage = 1;
 	$scope.itemsPerPage = 5;
 	
@@ -11,107 +15,129 @@ app.controller('pozoController', function($scope, $http) {
 		});
 	}
 	
-	$scope.getPlataformas = function() {
-		$http.get('/service/plataforma/search/findByActive')
-		.success(function(data) {
-			$scope.plataforma = data._embedded.plataforma;	
-		}).error(function(data) {
-			console.log('Error: ' + data);
-		});
-	}
-	
-	$scope.getEdPlataforma = function() {
-		$http.get($scope.currentRow._links.plataforma.href)
-		.success(function(data) {	
-			$scope.itemPlataformas = data;
-		}).error(function(data) { 
-			console.log('Error: ' + data);
-		});
-	}
-		
-	
-	$scope.getCurrentRow = function(current) {
-		$scope.currentRow = current;
-	}
-	
-	$scope.cancel= function() {
-		$scope.saveModel = null;
-	}
-	
 	$scope.save = function() {
-		var descPozo =  $('input:text[name=descPozo_new]').val();
-		var plataforma =  $('select[name=plataforma_new]').val();
-		var estaPozo = true;
-		var pozo = { descPozo, plataforma, estaPozo };
-		$http({
-		    url: '/service/pozo',
-		    method: "post",
-		    headers: {
-		        "Content-Type": "application/hal+json"
-		    },
-		    data: pozo
-		}).success(function(data) {
-			$scope.findAll();
-			$scope.saveModel = null;
-			$('#formSave').trigger('reset');
-			$('#saveModal').modal('hide');
-		}).error(function(data) {
-			console.log('Error:' + data);
-		});	
-	}
-	
-	
-	$scope.update = function() {
-		var descPozo =  $('input:text[name=descPozo_edit]').val();
-		var plataforma =  $('select[name=plataforma_edit]').val();
-		var estaPozo= true;
-		var pozo = { descPozo, plataforma, estaPozo};
-		$http({
-		    url: $scope.currentRow._links.pozo.href,
-		    method: "put",
-		    headers: {
-		        "Content-Type": "application/hal+json"
-		    },
-		    data: pozo
-		}).success(function(data) {
-			$scope.findAll();
-			$('#editModal').modal('hide');
-		}).error(function(data) {
-			console.log('Error:' + data);
+		$scope.pozo = {};
+		var modalInstance = $modal.open({
+             template: document.getElementById("saveModal").childNodes[1].innerHTML,
+             backdrop: 'static', keyboard: false, size:'sm',
+             controller: function($scope, $http, $modalInstance){
+            	 
+            	 $scope.add = function(){
+            		 $scope.pozo.estaPozo = 1;
+            		 $scope.pozo.plataforma = $scope.pozo.plataforma._links.plataforma.href;
+            		 $modalInstance.close($scope.pozo);
+            	 };
+            	 
+            	 $scope.getPlataformas = function() {
+            		 $http.get('/service/plataforma/search/findByActive')
+            		 .success(function(data) {
+            			 $scope.plataforma = data._embedded.plataforma;	
+            		 }).error(function(data) {
+            				console.log('Error: ' + data);
+            		 });
+            	 }
+            	 
+            	 $scope.cancel = function() {
+            		 $modalInstance.dismiss('cancel');
+            	 };
+             }
 		});
-		
-	}; 
-	
-	$scope.deleted = function() {
-		if($scope.currentRow.estaPozo){
-			var plataforma;
-			$http.get($scope.currentRow._links.plataforma.href)
-			.success(function(data) {
-				plataforma = data._links.plataforma.href;
-			}).error(function(data) {
-				console.log('Error: ' + data);
-			});
-			var descPozo = $scope.currentRow.descPozo;
-			var estaPozo = false;
-			var pozo = { descPozo, plataforma, estaPozo };
-			$http({
-			    url: $scope.currentRow._links.pozo.href,
-			    method: "put",
+			
+		modalInstance.result.then(function (value) {		
+			$http({ 
+				url: '/service/pozo',
+			    method: "post", data: value,
 			    headers: {
 			        "Content-Type": "application/hal+json"
-			    },
-			    data: pozo
+			    }
 			}).success(function(data) {
 				$scope.findAll();
-				$('#deleteModal').modal('hide');
 			}).error(function(data) {
 				console.log('Error:' + data);
-			});	
-		}
-		else
-			$('#deleteModal').modal('hide');
+			}); 
+	    }); 
 	};
-
+	
+	$scope.update = function(row) {
+		var modalInstance = $modal.open({
+             template: document.getElementById("editModal").childNodes[1].innerHTML,
+             backdrop: 'static', keyboard  : false , size:'sm',
+             controller: function($scope, $http, $modalInstance){
+            	 $scope.current = Object.assign({}, row);
+            	 
+            	 $scope.edit = function(){
+            		 $modalInstance.close($scope.current);
+            	 }
+            	 
+            	$scope.getPlataforma = function() {
+            		$http.get($scope.current._links.plataforma.href)
+            		.success(function(data) {	
+            			$scope.current.plataforma = data;
+            		}).error(function(data) { 
+            				console.log('Error: ' + data);
+            		});
+            	}
+            	 
+            	 $scope.cancel = function() {
+            		 $modalInstance.dismiss('cancel');
+            	 };
+             }
+	 });
+			
+	 modalInstance.result.then(function (value) {
+			$scope.item = { descPozo: value.descPozo, plataforma:value.plataforma._links.plataforma.href ,estaPozo: 1 };
+			$http({ 
+				url: value._links.pozo.href,
+			    method: "put", data: $scope.item,
+			    headers: {
+			        "Content-Type": "application/hal+json"
+			    }
+			}).success(function(data) {
+				$scope.findAll();
+			}).error(function(data) {
+				console.log('Error:' + data);
+			});
+			
+	    }); 
+	 };
+	 
+		$scope.deleted = function(row) {
+			var modalInstance = $modal.open({
+	             template: document.getElementById("deleteModal").childNodes[1].innerHTML,
+	             backdrop: 'static', keyboard  : false, size:'sm',
+	             controller: function($scope, $http, $modalInstance){
+	            	 
+	            	 $scope.remove = function(){
+	            		$http.get(row._links.plataforma.href)
+	         			.success(function(data) {	
+		         			row.plataforma = data._links.plataforma.href;
+		         			$modalInstance.close(row);
+		         		 }).error(function(data) { 
+		         				console.log('Error: ' + data);
+		         		 });
+	            	 }
+	            	 
+	            	 $scope.cancel = function() {
+	            		 $modalInstance.dismiss('cancel');
+	            	 };
+	             }
+			});
+				
+			modalInstance.result.then(function (value) {
+				$scope.item = { descPozo: value.descPozo, plataforma:value.plataforma ,estaPozo: 0 };
+				$http({ 
+					url: value._links.pozo.href,
+				    method: "put", data: $scope.item,
+				    headers: {
+				        "Content-Type": "application/hal+json"
+				    }
+				 }).success(function(data) {
+					$scope.findAll();
+				 }).error(function(data) {
+					console.log('Error:' + data);
+				 }); 
+		    }); 
+		};
 });
 
 app.controller('plataformaController', function($scope, $http, $modal) {
