@@ -1,5 +1,37 @@
 app.controller('reporteController', function($scope, $http) {
-		
+	$scope.espacio;
+	$scope.select1 = true;
+	$scope.espacioChange = function (value) {
+		$scope.select1 = false;
+		if(value){
+			$scope.data = [{label:'Estibas',value:'taller'},
+		    {label:'Taller',value:'taller'}, {label:'Unidad de Inspección',value:'unidadinspeccion'}];
+			$scope.getTipo('/service/patio/search/findByActive');
+		}
+		else{
+			$scope.data = [{label:'Pozo',value:''}];
+			$scope.getTipo('/service/plataforma/search/findByActive');
+		}
+	}
+	
+	$scope.getTipo = function(value) {
+		$http.get(value)
+		.success(function(data) {
+			if(value.includes('patio'))
+				$scope.tipo = data._embedded.patio;
+			else
+				$scope.tipo = data._embedded.plataforma;
+		}).error(function(data) { 
+				console.log('Error: ' + data);
+		});
+	}
+	
+	$scope.isEmpty = function (value) {
+	    return (!value || value == undefined || value == "" || value.length == 0);
+	}
+	
+	
+	
 });
 
 app.controller('pozoController', function($scope, $http, $modal) {
