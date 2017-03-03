@@ -1,11 +1,11 @@
 app.controller('reporteController', function($scope, $http) {
-	$scope.espacio;
 	$scope.select1 = true;
+	$scope.checkType = true;
 	$scope.espacioChange = function (value) {
 		$scope.select1 = false;
 		if(value){
-			$scope.data = [{label:'Estibas',value:'taller'},
-		    {label:'Taller',value:'taller'}, {label:'Unidad de Inspección',value:'unidadinspeccion'}];
+			$scope.data = [{label:'ESTIBAS',value:'estiba'},
+		    {label:'TALLER',value:'taller'}, {label:'UNIDAD DE INSPECCIÓN',value:'unidadinspeccion'}];
 			$scope.getTipo('/service/patio/search/findByActive');
 		}
 		else{
@@ -26,11 +26,18 @@ app.controller('reporteController', function($scope, $http) {
 		});
 	}
 	
-	$scope.isEmpty = function (value) {
-	    return (!value || value == undefined || value == "" || value.length == 0);
+	$scope.changeType = function(){
+		if($scope.isEmpty ($scope.model))
+			$scope.checkType = true;
+		else
+			$scope.checkType = false;
 	}
 	
+	$scope.isEmpty = function (value) {
+	    return (value === ''|| value == 'undefined' || !value  || value.length == 0);
+	}
 	
+
 	
 });
 

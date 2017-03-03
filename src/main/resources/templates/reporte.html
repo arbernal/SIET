@@ -23,20 +23,24 @@
 								name="espacio" class="form-check-input" data-ng-model="espacio"
 								data-ng-change="espacioChange(true)" value="true" /> Patio
 							</label>
+							
 						</div>
 						<div class="form-check">
 							<label class="form-check-label"> <input type="radio"
 								name="espacio" class="form-check-input" data-ng-model="espacio"
-								data-ng-change="espacioChange(false)" value="false" /> Plataforma
+								data-ng-change="espacioChange(false)" value="false" />
+								Plataforma
 							</label>
 						</div>
 					</td>
-					<td><select class="form-control" data-ng-model="model1" data-ng-disabled="select1"
-						data-ng-options="isEmpty(item.descPati)?item.descPlat:item.descPati  for item in tipo">
+					<td><select class="form-control" data-ng-model="model1"
+						data-ng-disabled="select1"  data-ng-change="changeType()"
+						data-ng-options="isEmpty(item.descPati)?item.descPlat:item.descPati for item in tipo">
 							<option value="" selected="selected">-- Seleccione una
 								opción --</option>
 					</select></td>
-					<td><select class="form-control" data-ng-model="model" data-ng-disabled="!model1"
+					<td><select class="form-control" data-ng-model="model"
+						data-ng-disabled="isEmpty(model1) && checkType"
 						data-ng-options="item.label for item in data">
 							<option value="" selected="selected">-- Seleccione una
 								opción --</option>
