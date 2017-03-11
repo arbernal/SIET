@@ -8,12 +8,12 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import org.hibernate.annotations.Type;
-
 import lombok.Data;
+
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
 
 /**
@@ -28,8 +28,9 @@ public class Plataforma implements Serializable {
 
 	@Id
 	@Column(name="id_plat")
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int idPlat;
+	@GeneratedValue(generator="increment")
+    @GenericGenerator(name="increment", strategy = "increment")
+	private Long idPlat;
 
 	@Column(name="code_plat")
 	private String codePlat;

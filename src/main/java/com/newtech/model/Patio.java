@@ -8,11 +8,12 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
 
 import lombok.Data;
 
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
 
@@ -28,7 +29,8 @@ public class Patio implements Serializable {
 
 	@Id
 	@Column(name="id_pati")
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(generator="increment")
+    @GenericGenerator(name="increment", strategy = "increment")
 	private Integer idPati;
 	
 	
@@ -44,4 +46,10 @@ public class Patio implements Serializable {
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private boolean estaPati;
 
+	
+	@PrePersist
+	public void generateId(){
+		System.out.println(idPati);
+	}
+	
 }

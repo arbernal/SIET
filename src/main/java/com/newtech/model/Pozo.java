@@ -8,14 +8,14 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
-import org.hibernate.annotations.Type;
-
 import lombok.Data;
+
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
 
 /**
@@ -30,8 +30,9 @@ public class Pozo implements Serializable {
 
 	@Id
 	@Column(name="id_pozo")
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer idPozo;
+	@GeneratedValue(generator="increment")
+    @GenericGenerator(name="increment", strategy = "increment")
+	private Long idPozo;
 
 	@Column(name="desc_pozo")
 	private String descPozo;

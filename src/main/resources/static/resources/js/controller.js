@@ -1,20 +1,25 @@
 app.controller('reporteController', function($scope, $http) {
 	$scope.select1 = true;
 	$scope.checkType = true;
-	$scope.espacioChange = function (value) {
+	$scope.changeType = function (value) {
 		$scope.select1 = false;
+		$scope.checkType = true;
 		if(value){
-			$scope.data = [{label:'ESTIBAS',value:'estiba'},
-		    {label:'TALLER',value:'taller'}, {label:'UNIDAD DE INSPECCIÓN',value:'unidadinspeccion'}];
-			$scope.getTipo('/service/patio/search/findByActive');
+			$scope.data = [{label:'ESTIBA',value:'/service/estiba/search/findByActive'},
+		    {label:'TALLER',value:'/service/taller/search/findByActive'}, 
+		    {label:'UNIDAD DE INSPECCIÓN',value:'/service/unidadinspeccion/search/findByActive'}];
+			$scope.getType('/service/patio/search/findByActive');
 		}
 		else{
-			$scope.data = [{label:'Pozo',value:''}];
-			$scope.getTipo('/service/plataforma/search/findByActive');
+			$scope.data = [{label:'Pozo',value:'/service/pozo/search/findByActive'}];
+			$scope.getType('/service/plataforma/search/findByActive');
 		}
+		$scope.subTypeModel ='';
+		$scope.typeModel = '';
+		$scope.model ='';
 	}
 	
-	$scope.getTipo = function(value) {
+	$scope.getType = function(value) {
 		$http.get(value)
 		.success(function(data) {
 			if(value.includes('patio'))
@@ -26,15 +31,46 @@ app.controller('reporteController', function($scope, $http) {
 		});
 	}
 	
-	$scope.changeType = function(){
-		if($scope.isEmpty ($scope.model))
+	$scope.getSubType = function() {
+		if(!$scope.isEmpty($scope.subTypeModel)){
+			$http.get($scope.subTypeModel.value)
+			.success(function(data) {
+				switch(true){
+				case $scope.subTypeModel.value.includes('estiba'):
+					$scope.subTipo = data._embedded.estiba;
+					break;
+				case $scope.subTypeModel.value.includes('taller'):
+					$scope.subTipo = data._embedded.taller;
+					break;
+				case $scope.subTypeModel.value.includes('patio'):
+					$scope.subTipo = data._embedded.patio;
+					break;
+				case $scope.subTypeModel.value.includes('pozo'):
+					$scope.subTipo = data._embedded.pozo;
+					break;
+				default:
+					$scope.subTipo = data._embedded.unidadinspeccion;
+					break;	
+				}
+			}).error(function(data) { 
+				console.log('Error: ' + data);
+			}); 
+		}else
+			$scope.model ='';
+	} 
+	
+	
+	$scope.disableType = function(){
+		if($scope.isEmpty ($scope.typeModel)){
 			$scope.checkType = true;
-		else
+			$scope.subTypeModel ='';
+			$scope.model ='';
+		}else
 			$scope.checkType = false;
 	}
 	
 	$scope.isEmpty = function (value) {
-	    return (value === ''|| value == 'undefined' || !value  || value.length == 0);
+	    return (value == ''||  value == 'null' || value == 'undefined' || !value  || value.length == 0 );
 	}
 	
 

@@ -6,75 +6,99 @@
 		<h3>Administración de Reportes</h3>
 	</div>
 	<div class="panel-body" style="height: 315px;">
+		<form action="/pdf" method="post">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th colspan="4">Ubicación</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td style="margin-right: -3em; padding-right: 0px;">
 
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					<th colspan="2">Espacio</th>
-					<th colspan="2">Lugar</th>
+							<div class="form-group"
+								style="margin-right: 0px; padding-right: 0px;">
+								<div class="col-sm-8">
+									<div class="radio" style="margin-top: 0px; padding-top: 0px;">
+										<label class="form-check-label" style="margin-left: -30px;">
+											<input type="radio" name="espacio" class="form-check-input"
+											data-ng-model="espacio" data-ng-change="changeType(true)"
+											required="required" value="true" /> Patio
+										</label>
+									</div>
+									<div class="radio">
+										<label class="form-check-label"> <input type="radio"
+											name="espacio" class="form-check-input"
+											data-ng-model="espacio" data-ng-change="changeType(false)"
+											required="required" value="false" /> Plataforma
+										</label>
+									</div>
+								</div>
+							</div>
+						</td>
+						<td><select class="form-control" data-ng-model="typeModel"
+							style="margin-top: 3%;" data-ng-disabled="select1"
+							required="required" data-ng-change="disableType()"
+							name="nombre_espacio"
+							data-ng-options="isEmpty(item.descPati)?item.descPlat:item.descPati
+							 for item in tipo track by isEmpty(item.descPati)?item.descPlat:item.descPati">
+								<option value="" selected="selected">-- Seleccione una
+									opción --</option>
+						</select></td>
+						<td><select class="form-control" data-ng-model="subTypeModel"
+							data-ng-change="getSubType()" style="margin-top: 3%;"
+							required="required"
+							data-ng-disabled="checkType &#38;&#38; checkType" name="lugar"
+							data-ng-options="item.label for item in data track by item.label">
+								<option value="" selected="selected">-- Seleccione una
+									opción --</option>
+						</select></td>
+						<td><select class="form-control" data-ng-model="model"
+							name="nombre_lugar" data-ng-disabled="isEmpty(subTypeModel)"
+							style="margin-top: 3%;"
+							data-ng-options="item.descEsti?item.descEsti:item
+						.descTall?item.descTall:item.descPati?item.descPati
+						:item.descPozo?item.descPozo:item.descInsp for item in 
+						subTipo track by item.descEsti?item.descEsti:item
+						.descTall?item.descTall:item.descPati?item.descPati
+						:item.descPozo?item.descPozo:item.descInsp"
+							required="required">
+								<option value="" selected="selected">-- Seleccione una
+									opción --</option>
+						</select></td>
+					</tr>
+				</tbody>
+				<thead>
+					<tr>
+						<th colspan="2">No.de Serie</th>
+						<th colspan="2">Fecha</th>
 
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>
-						<div class="form-check">
-							<label class="form-check-label"> <input type="radio"
-								name="espacio" class="form-check-input" data-ng-model="espacio"
-								data-ng-change="espacioChange(true)" value="true" /> Patio
-							</label>
-							
-						</div>
-						<div class="form-check">
-							<label class="form-check-label"> <input type="radio"
-								name="espacio" class="form-check-input" data-ng-model="espacio"
-								data-ng-change="espacioChange(false)" value="false" />
-								Plataforma
-							</label>
-						</div>
-					</td>
-					<td><select class="form-control" data-ng-model="model1"
-						data-ng-disabled="select1"  data-ng-change="changeType()"
-						data-ng-options="isEmpty(item.descPati)?item.descPlat:item.descPati for item in tipo">
-							<option value="" selected="selected">-- Seleccione una
-								opción --</option>
-					</select></td>
-					<td><select class="form-control" data-ng-model="model"
-						data-ng-disabled="isEmpty(model1) && checkType"
-						data-ng-options="item.label for item in data">
-							<option value="" selected="selected">-- Seleccione una
-								opción --</option>
-					</select></td>
-					<td></td>
-				</tr>
-			</tbody>
-			<thead>
-				<tr>
-					<th colspan="2">No.de Serie</th>
-					<th colspan="2">Fecha</th>
-
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td><input type="checkbox" class="form-check-input"
-						data-ng-model="checkNoSeri" /></td>
-					<td><input type="text" class="form-control" maxlength="45"
-						onblur="javascript:this.value = this.value.toUpperCase();"
-						onkeyup="javascript:this.value = this.value.toUpperCase();"
-						data-ng-disabled="!checkNoSeri" /></td>
-					<td><input type="checkbox" class="form-check-input"
-						data-ng-model="checkDate" /></td>
-					<td><input class="form-control" type="date" value="2011-08-19"
-						data-ng-disabled="!checkDate" /></td>
-				</tr>
-				<tr>
-					<td colspan="2"><button type="button"
-							class="btn btn-small btn-danger ">Generar</button></td>
-					<td colspan="2"></td>
-				</tr>
-			</tbody>
-		</table>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><input type="checkbox" class="form-check-input"
+							data-ng-model="checkNoSeri" /></td>
+						<td><input type="text" class="form-control" maxlength="45"
+							required="required"
+							onblur="javascript:this.value = this.value.toUpperCase();"
+							onkeyup="javascript:this.value = this.value.toUpperCase();"
+							data-ng-disabled="!checkNoSeri" /></td>
+						<td><input type="checkbox" class="form-check-input"
+							data-ng-model="checkDate" /></td>
+						<td><input class="form-control" type="date"
+							required="required" style="margin-left: -25% !important;"
+							value="2011-08-19" data-ng-disabled="!checkDate" /></td>
+					</tr>
+					<tr>
+						<td colspan="2"><input type="submit" value="Generar"
+							class="btn btn-small btn-danger" /></td>
+						<td colspan="2"></td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
 	</div>
 </div>
 <script type="text/javascript" src="resources/js/jquery-3.1.1.min.js"></script>

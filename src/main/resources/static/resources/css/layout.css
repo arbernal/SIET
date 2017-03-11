@@ -64,3 +64,27 @@ tr td:last-child, tr th:last-child {
 		margin-left: 0px;
 	}
 }
+
+@media screen and (min-width: 1200px) {
+	.label-radio {
+		margin-left: -2.5em;
+	}
+}
+
+@media screen and (max-width: 1199px) {
+	.label-radio {
+		margin-left: -1.5em !important;
+	}
+}
+
+@media screen and (max-width: 991px) {
+	.label-radio {
+		margin-left: 1.5em !important;
+	}
+}
+
+@media screen and (min-width: 95px) {
+	.label-radio {
+		margin-left: -3em !important;
+	}
+}
