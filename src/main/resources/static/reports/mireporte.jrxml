@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2017-03-10T09:32:46 -->
+<!-- 2017-03-15T11:49:18 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="mireporte" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="21f908b3-a742-464b-8783-67efe43ec35f">
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
 	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
 		<box>
 			<pen lineWidth="0.5" lineColor="#000000"/>
@@ -33,7 +33,7 @@
 	<subDataset name="dataSource" uuid="d91816fc-d3ff-4456-af1c-fd59c6d46da1">
 		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 		<queryString>
-			<![CDATA[]]>
+			<![CDATA[SELECT * FROM ubicacion]]>
 		</queryString>
 		<field name="numeSeri" class="java.lang.String"/>
 		<field name="fechRegi" class="java.sql.Timestamp"/>
@@ -41,7 +41,7 @@
 	</subDataset>
 	<parameter name="dataSource" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
 	<queryString>
-		<![CDATA[]]>
+		<![CDATA[SELECT 1]]>
 	</queryString>
 	<background>
 		<band splitType="Stretch"/>
@@ -58,7 +58,7 @@
 	<detail>
 		<band height="230" splitType="Stretch">
 			<componentElement>
-				<reportElement x="142" y="30" width="188" height="200" uuid="7b07f4ef-a7a7-4a53-ba6b-49f253286df9">
+				<reportElement x="0" y="0" width="188" height="200" uuid="7b07f4ef-a7a7-4a53-ba6b-49f253286df9">
 					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
 					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
 					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>

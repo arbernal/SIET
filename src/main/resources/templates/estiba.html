@@ -1,18 +1,17 @@
 <meta http-equiv="Content-Type" content="text/html;  charset=UTF-8" />
 <link href="/resources/css/bootstrap.min.css" rel="stylesheet"
 	type="text/css" />
-<div class="col-xs-12">
+<div class="col-md-9" role="main">
+	<div class="bs-docs-section">
 	<div class="panel-heading">
-		<h3>Administración de Taller</h3>
+		<h3>Administración de Estibas</h3>
 	</div>
 	<div class="panel-body" style="height: 280px;">
-	<button type="button" class="btn btn-small btn-default"
-			data-ng-click="save()">Nuevo</button>
-		<table class="table table-striped table-condensed"
-			data-ng-init="findAll()">
-			<thead>
+		<div class="table-responsive">
+			<table class="table" data-ng-init="findAll()">
+					<thead>
 				<tr>
-					<th>No.</th>
+					<th></th>
 					<th>Nombre</th>
 					<th>Patio</th>
 					<th colspan="2">Edición</th>
@@ -32,7 +31,9 @@
 							class="btn btn-small btn-danger">Eliminar</button></td>
 				</tr>
 			</tbody>
-		</table>
+			</table>
+		</div>
+
 	</div>
 
 	<pagination previous-text="Anterior" next-text="Siguiente"
@@ -51,7 +52,8 @@
 				<div class="modal-body" style="padding: 0px;"></div>
 				<h4 class="text-center">¿Confirma que desea eliminar?</h4>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-ng-click="cancel()" >Cancelar</button>
+					<button type="button" class="btn btn-default"
+						data-ng-click="cancel()">Cancelar</button>
 					<button class="btn btn-primary" data-ng-click="remove()">Aceptar</button>
 				</div>
 			</div>
@@ -129,9 +131,12 @@
 	</div>
 	<!-- Fin Dialogo Save -->
 
+	</div>
 </div>
 
 
 <script type="text/javascript" src="resources/js/jquery-3.1.1.min.js"></script>
 <script type="text/javascript" src="resources/js/widgets.js"></script>
 <script type="text/javascript" src="resources/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="http://getbootstrap.com/assets/js/docs.min.js"></script>
+<script src="http://getbootstrap.com/assets/js/ie10-viewport-bug-workaround.js"></script>

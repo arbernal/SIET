@@ -34,7 +34,7 @@ public class UnidadInspeccion implements Serializable {
 	@Column(name="id_insp")
 	@GeneratedValue(generator="increment")
     @GenericGenerator(name="increment", strategy = "increment")
-	private Long idInsp;
+	private Integer idInsp;
 
 	@Column(name="desc_insp")
 	private String descInsp;

@@ -6,9 +6,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class ViewController {
 
-	@RequestMapping(path = { "/index", "/index/" })
+	@RequestMapping(path = { "/index" })
 	public String getIndex() {
 		return "index";
+	}
+	
+	@RequestMapping(path = { "/home" })
+	public String getHome() {
+		return "home";
 	}
 
 	@RequestMapping(path = { "/estiba", "/estiba/" })

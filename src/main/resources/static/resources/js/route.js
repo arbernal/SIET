@@ -1,9 +1,8 @@
-var app = angular.module('app', [ 'ngRoute', 'ui.bootstrap' ]);
+var app = angular.module('app', [ 'ngRoute','ui.bootstrap' ]);
 app.config(function($routeProvider) {
 	
-	$routeProvider.when('/inicio', {
-		templateUrl : '/index',
-		controller : 'inicioController'
+	$routeProvider.when('/', {
+		templateUrl : '/home'
 	}).when('/modulo_estiba', {
 		templateUrl : '/estiba',
 		controller : 'estibaController'
@@ -25,11 +24,6 @@ app.config(function($routeProvider) {
 	}).when('/modulo_reporte', {
 		templateUrl : '/reporte',
 		controller : 'reporteController'
-	}).otherwise({
-		redirectTo : '/index'
 	});
 });
 
-app.controller('inicioController', function($scope) {
-	$scope.message = 'Hola, Mundo!';
-});

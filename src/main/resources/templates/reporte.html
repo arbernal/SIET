@@ -3,11 +3,11 @@
 	type="text/css" />
 <div class="list-group">
 	<div class="panel-heading">
-		<h3>Administración de Reportes</h3>
+		<h3>Reportes</h3>
 	</div>
 	<div class="panel-body" style="height: 315px;">
 		<form action="/pdf" method="post">
-			<table class="table table-striped">
+			<table class="table table-responsive table-striped">
 				<thead>
 					<tr>
 						<th colspan="4">Ubicación</th>
@@ -63,7 +63,7 @@
 						subTipo track by item.descEsti?item.descEsti:item
 						.descTall?item.descTall:item.descPati?item.descPati
 						:item.descPozo?item.descPozo:item.descInsp"
-							required="required">
+							>
 								<option value="" selected="selected">-- Seleccione una
 									opción --</option>
 						</select></td>
@@ -71,7 +71,8 @@
 				</tbody>
 				<thead>
 					<tr>
-						<th colspan="2">No.de Serie</th>
+						<th colspan="2"><div style="margin-left: 20%">No.de
+								Serie</div></th>
 						<th colspan="2">Fecha</th>
 
 					</tr>
@@ -89,7 +90,7 @@
 							data-ng-model="checkDate" /></td>
 						<td><input class="form-control" type="date"
 							required="required" style="margin-left: -25% !important;"
-							value="2011-08-19" data-ng-disabled="!checkDate" /></td>
+							data-ng-disabled="!checkDate" /></td>
 					</tr>
 					<tr>
 						<td colspan="2"><input type="submit" value="Generar"

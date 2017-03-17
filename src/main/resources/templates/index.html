@@ -1,49 +1,86 @@
 <!DOCTYPE html>
-<html data-ng-app="app">
+<html>
 <head>
 <title>Sistema de Rastreabilidad</title>
 <meta http-equiv="Content-Type" content="text/html;  charset=UTF-8" />
+<meta content="width=device-width,initial-scale=1" name="viewport" />
 <link rel="shortcut icon" type="image/x-icon"
 	href="/resources/img/favicon.ico" />
-
 <link href="/resources/css/bootstrap.min.css" rel="stylesheet"
 	type="text/css" />
 <link href="/resources/css/style.css" rel="stylesheet" type="text/css" />
 <link href="/resources/css/layout.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="resources/js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript"
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<style>
+.horizontal-collapse {
+	height: 70px;
+}
+
+.navbar-collapse.in {
+	overflow-y: hidden;
+}
+</style>
 </head>
 
-<body>
-	<header class="container-fluid">
-		<img alt="Logotipo de la empresa" src="/resources/img/banner.png"
-			class="img-responsive center-block img-banner"  />
-		<h1 class="text-center title-banner" >Sistema de Rastreabilidad</h1>
-	</header>
-	<nav class="container">
-		<ul class="nav nav-tabs">
-			<li role="presentation"><a href="#">Home</a></li>
-			<li role="presentation"><a href="#modulo_patio">Patios</a></li>
-			<li role="presentation"><a href="#modulo_estiba">Estibas</a></li>
-			<li role="presentation"><a href="#modulo_inspeccion">Inspección</a></li>
-			<li role="presentation"><a href="#modulo_taller">Taller</a></li>
-			<li role="presentation"><a href="#modulo_plataforma">Plataforma</a></li>
-			<li role="presentation"><a href="#modulo_pozo">Pozo</a></li>
-			<li role="presentation"><a href="#modulo_reporte">Reporte</a></li>
-		</ul>
+<body data-ng-app="app">
+
+	<div class="bs-docs-header" id="content" tabindex="-1">
+		<div class="container">
+			<img alt="Logotipo de la empresa" src="/resources/img/banner.png"
+				class="img-responsive center-block img-banner" />
+			<h1 class="text-center">Sistema de Rastreabilidad</h1>
+		</div>
+	</div>
+	
+
+	
+	
+
+	<nav class="navbar navbar-default"  data-ng-controller="navController" id="navSiet">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-ng-click="isCollapsed = !isCollapsed"
+					>
+					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+			</div>
+			<div class="collapse navbar-collapse" data-collapse="isCollapsed" >
+				<ul class="nav navbar-nav">
+					<li><a data-ng-click="onClickListener()" href="#/">Inicio</a></li>
+					<li><a data-ng-click="onClickListener()" href="#modulo_patio">Patios</a></li>
+					<li><a data-ng-click="onClickListener()" href="#modulo_estiba">Estibas</a></li>
+					<li><a data-ng-click="onClickListener()" href="#modulo_inspeccion">Inspección</a></li>
+					<li><a data-ng-click="onClickListener()" href="#modulo_taller">Taller</a></li>
+					<li><a data-ng-click="onClickListener()"  href="#modulo_plataforma">Plataforma</a></li>
+					<li><a data-ng-click="onClickListener()" href="#modulo_pozo">Pozo</a></li>
+					<li><a data-ng-click="onClickListener()" href="#modulo_reporte">Reporte</a></li>
+				</ul>
+
+			</div>
+		</div>
 	</nav>
-	<div class="container">
+
+
+	<div class="container bs-docs-container">
 		<div class="row">
+
 			<div data-ng-view="">
 				<section class="container-fluid"></section>
+				
+				
 			</div>
 		</div>
 
 	</div>
+
 	<footer class="container-fluid">
 		<p class="text-center">
-			<small>&copy; Copyright 2016, NEW TECH SYSTEMS Corporation</small>
+			<small>&copy; Copyright 2016, SIMMS Corporation</small>
 		</p>
 	</footer>
+
 	<script type="text/javascript" src="resources/js/angular.min.js"></script>
 	<script type="text/javascript" src="resources/js/angular-route.min.js"></script>
 	<script type="text/javascript" src="resources/js/route.js"></script>

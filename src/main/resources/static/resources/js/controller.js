@@ -1,3 +1,18 @@
+
+app.controller('navController', function($scope) {
+	$scope.isCollapsed = true;
+		
+	$scope.onClickListener = function(){
+		$scope.navWidth = document.getElementById('navSiet').clientWidth;
+		$scope.navWidth = parseInt($scope.navWidth);
+		if($scope.navWidth <= 768){
+			$scope.isCollapsed = !$scope.isCollapsed;
+		}
+		
+	}
+	
+});
+
 app.controller('reporteController', function($scope, $http) {
 	$scope.select1 = true;
 	$scope.checkType = true;
@@ -716,7 +731,6 @@ app.controller('estibaController', function($scope, $http, $modal) {
             		 }).error(function(data) { 
             				console.log('Error: ' + data);
             		 });
-            		 console.log($scope.current);
             	 }
             	 
             	 $scope.cancel = function() {

@@ -9,7 +9,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.PrePersist;
 
 import lombok.Data;
 
@@ -45,11 +44,5 @@ public class Patio implements Serializable {
 	@Column(name="esta_pati")
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private boolean estaPati;
-
-	
-	@PrePersist
-	public void generateId(){
-		System.out.println(idPati);
-	}
-	
+	  
 }

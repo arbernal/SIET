@@ -11,7 +11,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import javax.persistence.PrePersist;
 
 import lombok.Data;
 
@@ -32,7 +31,7 @@ public class Estiba implements Serializable {
 	@Column(name = "id_esti")
 	@GeneratedValue(generator="increment")
     @GenericGenerator(name="increment", strategy = "increment")
-	private Long idEsti;
+	private Integer idEsti;
 
 	@Column(name = "desc_esti")
 	private String descEsti;
@@ -44,10 +43,5 @@ public class Estiba implements Serializable {
 	@Column(name="esta_esti")
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private boolean estaEsti;
-
-	@PrePersist
-	public void generateId(){
-		System.out.println(patio);
-	}
 	
 }

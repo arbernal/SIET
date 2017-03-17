@@ -3,6 +3,8 @@ package com.newtech.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.sf.jasperreports.engine.JREmptyDataSource;
+
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -28,27 +30,27 @@ public class ReportController {
 
 	@RequestMapping(value = "/pdf", method = RequestMethod.POST)
 	public ModelAndView getPdf(
-			@RequestParam(value = "espacio", required = false) Boolean espacio,
-			@RequestParam(value = "nombre_espacio", required = false) String nombreEspacio,
-			@RequestParam(value = "lugar", required = false) String lugar,
-			@RequestParam(value = "nombre_lugar", required = false) String nombreLugar) {
-		/*
-		 * System.out.println("1 variable : " + espacio);
-		 * System.out.println("2 variable : " + nombreEspacio);
-		 * System.out.println("3 variable : " + lugar);
-		 * System.out.println("4 variable : " + nombreLugar); return new
-		 * ModelAndView("index");
-		 */
+			@RequestParam(value = "espacio") Boolean espacio,
+			@RequestParam(value = "nombre_espacio") StringBuilder nombreEspacio,
+			@RequestParam(value = "lugar") StringBuilder lugar,
+			@RequestParam(value = "nombre_lugar") StringBuilder nombreLugar) {
 
-		JasperReportsPdfView view = new JasperReportsPdfView();
-		view.setUrl("classpath:/static/reports/mireporte.jrxml");
-		view.setReportDataKey("dataSource");
+		String tipo = espacio ? "PATIO:":"PLATAFORMA:";
 		
-		 Map<String, Object> params = new HashMap<String, Object>();
-		 params.put("dataSource",dataSource);
-	
+		JasperReportsPdfView view = new JasperReportsPdfView();
+	    view.setUrl("classpath:/static/reports/report1.jrxml");
+	    view.setReportDataKey("dataSource");
+	    view.setJdbcDataSource(dataSource);
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("dataSource", new JREmptyDataSource());
+		params.put("espacio", tipo);
+		params.put("nombre_espacio", nombreEspacio.toString());
+		params.put("lugar", lugar.toString());
+		params.put("nombre_lugar", nombreLugar.toString());
 		view.setApplicationContext(appContext);
-		return new ModelAndView(view, null);
+		return new ModelAndView(view, params); 
+		
+	
 
 	}
 

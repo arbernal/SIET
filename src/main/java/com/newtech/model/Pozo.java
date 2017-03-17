@@ -32,7 +32,7 @@ public class Pozo implements Serializable {
 	@Column(name="id_pozo")
 	@GeneratedValue(generator="increment")
     @GenericGenerator(name="increment", strategy = "increment")
-	private Long idPozo;
+	private Integer idPozo;
 
 	@Column(name="desc_pozo")
 	private String descPozo;

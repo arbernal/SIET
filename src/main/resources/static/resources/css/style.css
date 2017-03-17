@@ -1,4 +1,4 @@
-header {
+#content {
 	background: #0091EA;
 	color: white;
 }
@@ -35,3 +35,8 @@ input[type="text"]:disabled {
 	border: none;
     background: transparent;
 }
+
+ .navbar-collapse.in {
+    overflow-y: hidden;
+  }
+  

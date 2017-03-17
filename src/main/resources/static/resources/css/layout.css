@@ -36,17 +36,15 @@ tr td:last-child, tr th:last-child {
 	vertical-align: middle;
 }
 
-.nav-tabs > li, .nav-pills > li {
-    float:none !important;
-    display:inline-block !important;
-    *display:inline !; /* ie7 fix */
-     zoom:1; /* hasLayout ie7 trigger */
+.navbar .navbar-nav {
+	display: inline-block;
+	float: none;
+	vertical-align: top;
 }
 
-.nav-tabs, .nav-pills {
-    text-align:center !important;
+.navbar .navbar-collapse {
+	text-align: center;
 }
-
 
 @media screen and (min-width: 1370px) {
 	.img-banner {
@@ -59,32 +57,9 @@ tr td:last-child, tr th:last-child {
 	.img-banner {
 		max-width: 25% !important;
 	}
-	.title-banner{
+	.title-banner {
 		margin-top: 0%;
 		margin-left: 0px;
 	}
 }
 
-@media screen and (min-width: 1200px) {
-	.label-radio {
-		margin-left: -2.5em;
-	}
-}
-
-@media screen and (max-width: 1199px) {
-	.label-radio {
-		margin-left: -1.5em !important;
-	}
-}
-
-@media screen and (max-width: 991px) {
-	.label-radio {
-		margin-left: 1.5em !important;
-	}
-}
-
-@media screen and (min-width: 95px) {
-	.label-radio {
-		margin-left: -3em !important;
-	}
-}
