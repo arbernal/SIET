@@ -46,6 +46,12 @@ tr td:last-child, tr th:last-child {
 	text-align: center;
 }
 
+.pagination-sm .pagination {
+	margin-top: 50px !important;
+	margin-bottom: 80px !important;
+}
+
+
 @media screen and (min-width: 1370px) {
 	.img-banner {
 		height: 230px !important;
@@ -58,8 +64,10 @@ tr td:last-child, tr th:last-child {
 		max-width: 25% !important;
 	}
 	.title-banner {
-		margin-top: 0%;
-		margin-left: 0px;
+		margin-top: 0% !important;
+		margin-left: 0px !important;
 	}
 }
+
+
 

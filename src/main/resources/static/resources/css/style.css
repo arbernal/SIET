@@ -18,8 +18,8 @@ aside {
 }
 
 footer {
-	background: #0091EA;
-	color: white;
+	background: #0091EA !important;
+	color: white !important;
 }
 
 thead th {

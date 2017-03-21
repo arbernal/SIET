@@ -3,13 +3,15 @@
 <head>
 <title>Sistema de Rastreabilidad</title>
 <meta http-equiv="Content-Type" content="text/html;  charset=UTF-8" />
-<meta content="width=device-width,initial-scale=1" name="viewport" />
+<meta content="width=device-width,initial-scale=1,maximum-scale=1"
+	name="viewport" />
 <link rel="shortcut icon" type="image/x-icon"
 	href="/resources/img/favicon.ico" />
 <link href="/resources/css/bootstrap.min.css" rel="stylesheet"
 	type="text/css" />
 <link href="/resources/css/style.css" rel="stylesheet" type="text/css" />
 <link href="/resources/css/layout.css" rel="stylesheet" type="text/css" />
+<link href="/resources/css/sticky-footer.css" rel="stylesheet" />
 <script type="text/javascript"
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <style>
@@ -32,53 +34,50 @@
 			<h1 class="text-center">Sistema de Rastreabilidad</h1>
 		</div>
 	</div>
-	
 
-	
-	
 
-	<nav class="navbar navbar-default"  data-ng-controller="navController" id="navSiet">
+	<nav class="navbar navbar-default" data-ng-controller="navController"
+		id="navSiet">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-ng-click="isCollapsed = !isCollapsed"
-					>
+				<button type="button" class="navbar-toggle"
+					data-ng-click="isCollapsed = !isCollapsed">
 					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
 			</div>
-			<div class="collapse navbar-collapse" data-collapse="isCollapsed" >
+			<div class="collapse navbar-collapse" data-collapse="isCollapsed">
 				<ul class="nav navbar-nav">
 					<li><a data-ng-click="onClickListener()" href="#/">Inicio</a></li>
 					<li><a data-ng-click="onClickListener()" href="#modulo_patio">Patios</a></li>
 					<li><a data-ng-click="onClickListener()" href="#modulo_estiba">Estibas</a></li>
-					<li><a data-ng-click="onClickListener()" href="#modulo_inspeccion">Inspección</a></li>
+					<li><a data-ng-click="onClickListener()"
+						href="#modulo_inspeccion">Inspección</a></li>
 					<li><a data-ng-click="onClickListener()" href="#modulo_taller">Taller</a></li>
-					<li><a data-ng-click="onClickListener()"  href="#modulo_plataforma">Plataforma</a></li>
+					<li><a data-ng-click="onClickListener()"
+						href="#modulo_plataforma">Plataforma</a></li>
 					<li><a data-ng-click="onClickListener()" href="#modulo_pozo">Pozo</a></li>
-					<li><a data-ng-click="onClickListener()" href="#modulo_reporte">Reporte</a></li>
+					<li><a data-ng-click="onClickListener()"
+						href="#modulo_reporte">Reporte</a></li>
 				</ul>
-
 			</div>
 		</div>
 	</nav>
 
 
-	<div class="container bs-docs-container">
+	<div class="container">
 		<div class="row">
 
 			<div data-ng-view="">
 				<section class="container-fluid"></section>
-				
-				
 			</div>
 		</div>
-
 	</div>
 
-	<footer class="container-fluid">
-		<p class="text-center">
-			<small>&copy; Copyright 2016, SIMMS Corporation</small>
-		</p>
+	<footer class="footer" style="margin-top: 20px">
+		<div class="container">
+			<p class="text-center">&copy; Copyright 2016, NEW TECH SYSTEMS</p>
+		</div>
 	</footer>
 
 	<script type="text/javascript" src="resources/js/angular.min.js"></script>

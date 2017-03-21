@@ -7,7 +7,8 @@
 	</div>
 	<div class="panel-body" style="height: 315px;">
 		<form action="/pdf" method="post">
-			<table class="table table-responsive table-striped">
+		<div class="table-responsive">
+			<table class="table table-striped">
 				<thead>
 					<tr>
 						<th colspan="4">Ubicación</th>
@@ -16,7 +17,6 @@
 				<tbody>
 					<tr>
 						<td style="margin-right: -3em; padding-right: 0px;">
-
 							<div class="form-group"
 								style="margin-right: 0px; padding-right: 0px;">
 								<div class="col-sm-8">
@@ -62,8 +62,7 @@
 						:item.descPozo?item.descPozo:item.descInsp for item in 
 						subTipo track by item.descEsti?item.descEsti:item
 						.descTall?item.descTall:item.descPati?item.descPati
-						:item.descPozo?item.descPozo:item.descInsp"
-							>
+						:item.descPozo?item.descPozo:item.descInsp">
 								<option value="" selected="selected">-- Seleccione una
 									opción --</option>
 						</select></td>
@@ -99,6 +98,7 @@
 					</tr>
 				</tbody>
 			</table>
+			</div>
 		</form>
 	</div>
 </div>

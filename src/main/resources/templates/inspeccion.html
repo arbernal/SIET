@@ -34,9 +34,9 @@
 	</div>
 
 	<pagination previous-text="Anterior" next-text="Siguiente"
-		style="margin-top: 0px;" total-items="totalItems"
-		data-ng-model="currentPage" class="pagination-sm"
-		items-per-page="itemsPerPage"></pagination>
+		style="margin-top: 50px;margin-bottom: 70px; margin-left: 15px;"
+		total-items="totalItems" data-ng-model="currentPage"
+		class="pagination-sm" items-per-page="itemsPerPage"></pagination>
 
 	<!-- Dialogo para Opción Delete -->
 	<div class="modal fade" role="dialog" id="deleteModal" tabindex="-1"
@@ -49,7 +49,8 @@
 				<div class="modal-body" style="padding: 0px;"></div>
 				<h4 class="text-center">¿Confirma que desea eliminar?</h4>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-ng-click="cancel()" >Cancelar</button>
+					<button type="button" class="btn btn-default"
+						data-ng-click="cancel()">Cancelar</button>
 					<button class="btn btn-primary" data-ng-click="remove()">Aceptar</button>
 				</div>
 			</div>
