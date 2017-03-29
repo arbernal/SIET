@@ -51,23 +51,85 @@ tr td:last-child, tr th:last-child {
 	margin-bottom: 80px !important;
 }
 
-
 @media screen and (min-width: 1370px) {
 	.img-banner {
 		height: 230px !important;
 		width: 900px !important;
 	}
+	.pagination-top {
+		display: none !important;
+	}
+	.pagination-other {
+		display: block !important;
+		margin-top: 50px;
+		margin-bottom: 74px;
+	}
 }
 
-@media screen and (max-width:1369px) {
+@media screen and (max-width: 768px) {
+	.pagination-top {
+		display: none !important;
+	}
+	.pagination-other {
+		display: block !important;
+		margin-bottom: 130px !important;
+		margin-left: 5px;
+	}
+}
+
+@media screen and (min-width:769px) and (max-width:1369px) {
 	.img-banner {
-		max-width: 25% !important;
+		width: 380px !important;
+		float: left !important;
 	}
 	.title-banner {
-		margin-top: 0% !important;
-		margin-left: 0px !important;
+		width: 200px !important;
+		float: left !important;
+	}
+	.footer {
+		height: 40px !important;
+	}
+	.bs-docs-header {
+		padding-top: 5px !important;
+		padding-bottom: 5px !important;
+	}
+	.pagination-top {
+		display: inline !important;
+	}
+	.pagination-other {
+		display: none !important;
+	}
+	h1 {
+		font-size: 28px !important;
+		margin-bottom: 0px !important;
+		margin-top: 5% !important;
+		margin-right: 10px !important;
+	}
+	h3 {
+		margin-top: 5px !important;
+		margin-bottom: 0px !important;
 	}
 }
 
+.button-save {
+	font-size: 1.25rem;
+	background-color: #fff;
+	color: #337ab7;
+	text-decoration: none;
+	margin-left: -1px;
+	line-height: 1.25;
+	border: 1px solid #ddd;
+	height: 30px;
+	float: left;
+	border-top-right-radius: 3px;
+	border-bottom-right-radius: 3px;
+	border-top-left-radius: 3px;
+	border-bottom-left-radius: 3px;
+	padding-left: 12px;
+	padding-right: 12px;
+	margin-bottom: 1px;
+}
 
-
+.button-save:hover {
+	background-color: #EEEEEE !important;
+}

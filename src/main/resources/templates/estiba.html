@@ -1,137 +1,138 @@
 <meta http-equiv="Content-Type" content="text/html;  charset=UTF-8" />
 <link href="/resources/css/bootstrap.min.css" rel="stylesheet"
 	type="text/css" />
-<div class="col-md-9" role="main">
-	<div class="bs-docs-section">
-		<div class="panel-heading">
-			<h3>Administración de Estibas</h3>
-		</div>
-		<div class="panel-body" style="height: 280px;">
-			<div class="table-responsive">
-				<table class="table" data-ng-init="findAll()">
-					<thead>
-						<tr>
-							<th></th>
-							<th>Nombre</th>
-							<th>Patio</th>
-							<th colspan="2">Edición</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr
-							data-ng-repeat="row in data.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))"
-							data-myattr="{{$index}}">
-							<td>{{ currentPage == 1 ? $index + 1 : ((currentPage - 1) *
-								itemsPerPage) + $index + 1 }}</td>
-							<td>{{ row.descEsti }}</td>
-							<td data-patio="{{ row._links.patio.href }}"></td>
-							<td><button type="button" class="btn btn-primary btn-small"
-									data-ng-click="update(row)">Editar</button></td>
-							<td><button type="button" data-ng-click="deleted(row)"
-									class="btn btn-small btn-danger">Eliminar</button></td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-
-		</div>
-
+<div class="col-xs-12">
+	<div class="panel-heading">
+		<h3>Administración de Estibas</h3>
+	</div>
+	<div class="panel-body" style="height: 280px;">
+		<button type="button" class="button-save" data-ng-click="save()">Nuevo</button>
 		<pagination previous-text="Anterior" next-text="Siguiente"
-			style="margin-top: 50px;margin-bottom: 70px; margin-left: 15px;"
+			style="float: right;margin-bottom: 1px;margin-top: 0px;"
 			total-items="totalItems" data-ng-model="currentPage"
-			class="pagination-sm" items-per-page="itemsPerPage"></pagination>
+			class="pagination-sm pagination-top" items-per-page="itemsPerPage"></pagination>
+		<table class="table table-striped table-condensed"
+			data-ng-init="findAll()">
+			<thead>
+				<tr>
+					<th></th>
+					<th>Nombre</th>
+					<th>Patio</th>
+					<th colspan="2">Edición</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr
+					data-ng-repeat="row in data.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))"
+					data-myattr="{{$index}}">
+					<td>{{ currentPage == 1 ? $index + 1 : ((currentPage - 1) *
+						itemsPerPage) + $index + 1 }}</td>
+					<td>{{ row.descEsti }}</td>
+					<td data-patio="{{ row._links.patio.href }}"></td>
+					<td><button type="button" class="btn btn-primary btn-small"
+							data-ng-click="update(row)">Editar</button></td>
+					<td><button type="button" data-ng-click="deleted(row)"
+							class="btn btn-small btn-danger">Eliminar</button></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 
-		<!-- Dialogo para Opción Delete -->
-		<div class="modal fade" role="dialog" id="deleteModal" tabindex="-1"
-			style="display: none;">
-			<div class="modal-dialog modal-sm">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h4 class="modal-title">Eliminar</h4>
+	<pagination previous-text="Anterior" next-text="Siguiente"
+		style="margin-top: 50px;margin-bottom: 74px; margin-left: 15px;"
+		total-items="totalItems" data-ng-model="currentPage"
+		class="pagination-sm" items-per-page="itemsPerPage"></pagination>
+
+	<!-- Dialogo para Opción Delete -->
+	<div class="modal fade" role="dialog" id="deleteModal" tabindex="-1"
+		style="display: none;">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Eliminar</h4>
+				</div>
+				<div class="modal-body" style="padding: 0px;"></div>
+				<h4 class="text-center">¿Confirma que desea eliminar?</h4>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default"
+						data-ng-click="cancel()">Cancelar</button>
+					<button class="btn btn-primary" data-ng-click="remove()">Aceptar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Fin Dialogo Delete -->
+
+
+	<!-- Dialogo para Opción Edit -->
+	<div class="modal fade" role="dialog" id="editModal" tabindex="-1"
+		style="display: none;">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Editar</h4>
+				</div>
+				<form id="formEdit" data-ng-submit="edit()">
+					<div class="modal-body">
+						<div class="form-group">
+							<label for="recipient-name" class="control-label">Nombre:</label>
+							<input type="text" class="form-control" maxlength="45"
+								required="required" data-ng-model="current.descEsti"
+								onblur="javascript:this.value = this.value.toUpperCase();"
+								onkeyup="javascript:this.value = this.value.toUpperCase();" />
+							<br /> <label class="control-label">Patio: </label> <input
+								type="text" disabled="disabled" data-ng-init="getPatio()"
+								data-ng-model="current.patio.descPati" />
+						</div>
 					</div>
-					<div class="modal-body" style="padding: 0px;"></div>
-					<h4 class="text-center">¿Confirma que desea eliminar?</h4>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default"
 							data-ng-click="cancel()">Cancelar</button>
-						<button class="btn btn-primary" data-ng-click="remove()">Aceptar</button>
+						<input type="submit" class="btn btn-primary" value="Guardar" />
 					</div>
-				</div>
+				</form>
 			</div>
 		</div>
-		<!-- Fin Dialogo Delete -->
-
-
-		<!-- Dialogo para Opción Edit -->
-		<div class="modal fade" role="dialog" id="editModal" tabindex="-1"
-			style="display: none;">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h4 class="modal-title">Editar</h4>
-					</div>
-					<form id="formEdit" data-ng-submit="edit()">
-						<div class="modal-body">
-							<div class="form-group">
-								<label for="recipient-name" class="control-label">Nombre:</label>
-								<input type="text" class="form-control" maxlength="45"
-									required="required" data-ng-model="current.descEsti"
-									onblur="javascript:this.value = this.value.toUpperCase();"
-									onkeyup="javascript:this.value = this.value.toUpperCase();" />
-								<br /> <label class="control-label">Patio: </label> <input
-									type="text" disabled="disabled" data-ng-init="getPatio()"
-									data-ng-model="current.patio.descPati" />
-							</div>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default"
-								data-ng-click="cancel()">Cancelar</button>
-							<input type="submit" class="btn btn-primary" value="Guardar" />
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-		<!-- Fin Dialogo Edit -->
-
-		<!-- Dialogo para Opción Save -->
-		<div class="modal fade" role="dialog" id="saveModal" tabindex="-1"
-			style="display: none;">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h4 class="modal-title">Nuevo</h4>
-					</div>
-					<form id="formSave" data-ng-submit="add()">
-						<div class="modal-body">
-							<div class="form-group">
-								<label class="control-label">Nombre:</label> <input type="text"
-									class="form-control" maxlength="45" required="required"
-									data-ng-model="estiba.descEsti"
-									onblur="javascript:this.value = this.value.toUpperCase();"
-									onkeyup="javascript:this.value = this.value.toUpperCase();" />
-								<label class="control-label">Patio:</label> <select
-									required="required" data-ng-model="estiba.patio"
-									data-ng-init="getPatios()"
-									data-ng-options="item as item.descPati for item in patios track by item._links.patio.href"
-									class="form-control">
-									<option value="" selected="selected">-- Seleccione una
-										opción --</option>
-								</select>
-							</div>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default exit"
-								data-ng-click="cancel()">Cancelar</button>
-							<input type="submit" class="btn btn-primary" value="Guardar" />
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-		<!-- Fin Dialogo Save -->
-
 	</div>
+	<!-- Fin Dialogo Edit -->
+
+	<!-- Dialogo para Opción Save -->
+	<div class="modal fade" role="dialog" id="saveModal" tabindex="-1"
+		style="display: none;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Nuevo</h4>
+				</div>
+				<form id="formSave" data-ng-submit="add()">
+					<div class="modal-body">
+						<div class="form-group">
+							<label class="control-label">Nombre:</label> <input type="text"
+								class="form-control" maxlength="45" required="required"
+								data-ng-model="estiba.descEsti"
+								onblur="javascript:this.value = this.value.toUpperCase();"
+								onkeyup="javascript:this.value = this.value.toUpperCase();" />
+							<label class="control-label">Patio:</label> <select
+								required="required" data-ng-model="estiba.patio"
+								data-ng-init="getPatios()"
+								data-ng-options="item as item.descPati for item in patios track by item._links.patio.href"
+								class="form-control">
+								<option value="" selected="selected">-- Seleccione una
+									opción --</option>
+							</select>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default exit"
+							data-ng-click="cancel()">Cancelar</button>
+						<input type="submit" class="btn btn-primary" value="Guardar" />
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!-- Fin Dialogo Save -->
+
 </div>
 
 

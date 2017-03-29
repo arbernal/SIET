@@ -12,7 +12,6 @@
 	color: white;
 }
 
-
 aside {
 	background: #c0392b;
 }
@@ -33,10 +32,15 @@ tbody td {
 
 input[type="text"]:disabled {
 	border: none;
-    background: transparent;
+	background: transparent;
 }
 
- .navbar-collapse.in {
-    overflow-y: hidden;
-  }
-  
+.navbar-collapse.in {
+	overflow-y: hidden;
+}
+
+@font-face {
+	font-family: spacefr;
+	src: url('/resources/font/spacefr.ttf');
+}
+

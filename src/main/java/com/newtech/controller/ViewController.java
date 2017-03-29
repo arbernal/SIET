@@ -50,5 +50,11 @@ public class ViewController {
 	public String getReporte() {
 		return "reporte";
 	}
+	
+	@RequestMapping(path = { "/prueba1", "/prueba1/" })
+	public String prueba1() {
+		return "prueba1";
+	}
+
 
 }
