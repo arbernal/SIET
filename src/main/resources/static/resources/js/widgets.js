@@ -1,8 +1,13 @@
-	$(".exit").click(function() {
-		// $('#saveModal').modal('toggle');
-		$('#saveModal').modal('hide');
-		$('#editModal').modal('hide');
-		$('#formSave').trigger('reset');
-		$('#formEdit').trigger('reset');
-	});
+$(document).ready(function() {
+	$(window).resize(function() {
+		 var size = $('#navSiet').width();
+		 if( parseInt(size) < 766){
+			 $( "div.demo-container" ).html();
+			 $("#remplace").html("Nuevo contenido de la capa");
+		 }
+		 else{
 	
+		 }
+	});
+});
+

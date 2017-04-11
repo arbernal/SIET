@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2017-03-16T11:23:48 -->
+<!-- 2017-03-30T13:09:58 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="eca4e62b-0067-485a-8332-5f2cb4fd3669">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
@@ -32,15 +32,17 @@
 	</style>
 	<subDataset name="dataSource" uuid="3296d042-a12f-448a-95ea-af485b77e7f8">
 		<queryString>
-			<![CDATA[]]>
+			<![CDATA[SELECT dire_tubo FROM ubicacion]]>
 		</queryString>
+		<field name="dire_tubo" class="java.lang.String"/>
 	</subDataset>
 	<parameter name="espacio" class="java.lang.String"/>
 	<parameter name="nombre_espacio" class="java.lang.String"/>
 	<parameter name="lugar" class="java.lang.String"/>
 	<parameter name="nombre_lugar" class="java.lang.String"/>
+	<parameter name="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource"/>
 	<queryString>
-		<![CDATA[SELECT 1]]>
+		<![CDATA[SELECT * FROM ubicacion]]>
 	</queryString>
 	<field name="espacio" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -171,7 +173,7 @@
 							<staticText>
 								<reportElement x="0" y="0" width="160" height="30" uuid="0d247d25-fc91-43b9-808f-a6d6ae43f308"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
-									<font fontName="Calibri" isBold="true"/>
+									<font fontName="Calibri" size="12" isBold="true"/>
 								</textElement>
 								<text><![CDATA[CONSECUTIVO]]></text>
 							</staticText>
@@ -184,10 +186,24 @@
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="110" uuid="19f0ec62-d89d-4bac-806f-a79973d5e323">
+					<jr:column width="140" uuid="19f0ec62-d89d-4bac-806f-a79973d5e323">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
-						<jr:tableHeader style="Table_TH" height="30" rowSpan="1"/>
-						<jr:detailCell style="Table_TD" height="30"/>
+						<jr:tableHeader style="Table_TH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="140" height="30" uuid="2e7a849e-1892-474a-9059-281ba469d478"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Calibri" size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[UBICACIÓN]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="140" height="30" uuid="80eda588-e8aa-417d-9db9-b0862852493b"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{dire_tubo}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
 					</jr:column>
 					<jr:column width="140" uuid="032cf944-87a7-4285-9443-c7fafc7fc584">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>

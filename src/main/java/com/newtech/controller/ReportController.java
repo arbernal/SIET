@@ -3,9 +3,8 @@ package com.newtech.controller;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.sf.jasperreports.engine.JREmptyDataSource;
+import javax.sql.DataSource;
 
-import org.apache.tomcat.jdbc.pool.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
@@ -23,6 +22,7 @@ public class ReportController {
 	@Autowired
 	private ApplicationContext appContext;
 
+	@Autowired
 	private DataSource dataSource;
 
 	@Autowired
@@ -31,27 +31,23 @@ public class ReportController {
 	@RequestMapping(value = "/pdf", method = RequestMethod.POST)
 	public ModelAndView getPdf(
 			@RequestParam(value = "espacio") Boolean espacio,
-			@RequestParam(value = "nombre_espacio") StringBuilder nombreEspacio,
-			@RequestParam(value = "lugar") StringBuilder lugar,
-			@RequestParam(value = "nombre_lugar") StringBuilder nombreLugar) {
+			@RequestParam(value = "nombre_espacio") String nombreEspacio,
+			@RequestParam(value = "lugar") String lugar,
+			@RequestParam(value = "nombre_lugar") String nombreLugar) {
 
 		String tipo = espacio ? "PATIO:":"PLATAFORMA:";
 		
 		JasperReportsPdfView view = new JasperReportsPdfView();
-	    view.setUrl("classpath:/static/reports/report1.jrxml");
+		view.setUrl("classpath:/static/reports/report.jrxml");
 	    view.setReportDataKey("dataSource");
-	    view.setJdbcDataSource(dataSource);
-		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("dataSource", new JREmptyDataSource());
+	    Map<String, Object> params = new HashMap<String, Object>();
+		params.put("dataSource",dataSource);
 		params.put("espacio", tipo);
-		params.put("nombre_espacio", nombreEspacio.toString());
+		params.put("nombre_espacio", nombreEspacio);
 		params.put("lugar", lugar.toString());
-		params.put("nombre_lugar", nombreLugar.toString());
+		params.put("nombre_lugar", nombreLugar);
 		view.setApplicationContext(appContext);
 		return new ModelAndView(view, params); 
-		
-	
-
 	}
 
 }

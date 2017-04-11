@@ -5,12 +5,10 @@ app.controller('navController', function($scope) {
 	$scope.onClickListener = function(){
 		$scope.navWidth = document.getElementById('navSiet').clientWidth;
 		$scope.navWidth = parseInt($scope.navWidth);
-		if($scope.navWidth <= 768){
+		if($scope.navWidth < 766){
 			$scope.isCollapsed = !$scope.isCollapsed;
 		}
-		
 	}
-	
 });
 
 app.controller('reporteController', function($scope, $http) {
@@ -87,9 +85,6 @@ app.controller('reporteController', function($scope, $http) {
 	$scope.isEmpty = function (value) {
 	    return (value == ''||  value == 'null' || value == 'undefined' || !value  || value.length == 0 );
 	}
-	
-
-	
 });
 
 app.controller('pozoController', function($scope, $http, $modal) {

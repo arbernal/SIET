@@ -5,7 +5,7 @@
 	<div class="panel-heading">
 		<h3>Administración de Estibas</h3>
 	</div>
-	<div class="panel-body" style="height: 280px;">
+	<div class="panel-body" style="height: 310px;">
 		<button type="button" class="button-save" data-ng-click="save()">Nuevo</button>
 		<pagination previous-text="Anterior" next-text="Siguiente"
 			style="float: right;margin-bottom: 1px;margin-top: 0px;"
@@ -39,9 +39,9 @@
 	</div>
 
 	<pagination previous-text="Anterior" next-text="Siguiente"
-		style="margin-top: 50px;margin-bottom: 74px; margin-left: 15px;"
 		total-items="totalItems" data-ng-model="currentPage"
-		class="pagination-sm" items-per-page="itemsPerPage"></pagination>
+		style="margin-left: 15px;" class="pagination-sm pagination-other"
+		items-per-page="itemsPerPage"></pagination>
 
 	<!-- Dialogo para Opción Delete -->
 	<div class="modal fade" role="dialog" id="deleteModal" tabindex="-1"

@@ -10,9 +10,9 @@
 		<button type="button" class="button-save" data-ng-click="save()">Nuevo</button>
 		<pagination previous-text="Anterior" next-text="Siguiente"
 			style="float: right;margin-bottom: 1px;margin-top: 0px;"
-			total-items="totalItems" data-ng-model="currentPage" 
+			total-items="totalItems" data-ng-model="currentPage"
 			class="pagination-sm pagination-top" items-per-page="itemsPerPage"></pagination>
-		<table class="table table-striped table-condensed"
+		<table class="table table-striped table-condensed table-filter"
 			data-ng-init="findAll()">
 			<thead>
 				<tr>
@@ -22,7 +22,7 @@
 					<th colspan="2">Edición</th>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody >
 				<tr
 					data-ng-repeat="row in data.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))"
 					data-myattr="{{$index}}">
@@ -40,8 +40,9 @@
 	</div>
 
 	<pagination previous-text="Anterior" next-text="Siguiente"
-		total-items="totalItems" data-ng-model="currentPage" style="margin-left: 15px;"
-		class="pagination-sm pagination-other" items-per-page="itemsPerPage"></pagination>
+		total-items="totalItems" data-ng-model="currentPage"
+		style="margin-left: 15px;" class="pagination-sm pagination-other"
+		items-per-page="itemsPerPage"></pagination>
 
 	<!-- Dialogo para Opción Delete -->
 	<div class="modal fade" role="dialog" id="deleteModal" tabindex="-1"

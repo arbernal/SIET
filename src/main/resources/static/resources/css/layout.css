@@ -78,6 +78,11 @@ tr td:last-child, tr th:last-child {
 }
 
 @media screen and (min-width:769px) and (max-width:1369px) {
+	
+	#navSiet{
+		margin-bottom: 0px;
+	}
+	
 	.img-banner {
 		width: 380px !important;
 		float: left !important;
